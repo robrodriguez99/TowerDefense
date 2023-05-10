@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Weapon
+{
+    Pistol = 0,
+    Shotgun = 1
+}
+
 public class Character : MonoBehaviour, IMovable, IRotable
 {
 
-    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private List<Gun> _availableWeapons;
+    [SerializeField] private Gun _currentWeapon;
     public float RotationSpeed => _rotationSpeed;
     [SerializeField] private float _rotationSpeed = 15f;
     public float MovementSpeed =>  _movementSpeed;
@@ -23,6 +30,7 @@ public class Character : MonoBehaviour, IMovable, IRotable
     // Start is called before the first frame update
     void Start()
     {
+        EquipWeapon(Weapon.Pistol);
     }
 
     // Update is called once per frame
@@ -31,8 +39,27 @@ public class Character : MonoBehaviour, IMovable, IRotable
         //Move fwd and bkw
         Move(Vector3.forward * Input.GetAxis("Vertical"));
         Rotation(Vector3.up * Input.GetAxis("Horizontal"));
-        //TODO ver ultimo param para container
-        if(Input.GetAxis("Fire1") > 0) Instantiate(_bulletPrefab, transform.position, transform.rotation);
+
+
+        if (Input.GetAxis("Fire1") > 0) _currentWeapon.Attack();
+        if (Input.GetKeyDown(KeyCode.R)) _currentWeapon.Reload();
+
+        //Equipar arma
+        if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.Pistol);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
+
+
+    }
+
+    private void EquipWeapon(Weapon weaponIdx)
+    {
+        foreach (Gun gun in _availableWeapons)
+        {
+            gun.gameObject.SetActive(false);
+        }
+
+        _currentWeapon = _availableWeapons[(int) weaponIdx];
+        _currentWeapon.gameObject.SetActive(true);
     }
 
 }
