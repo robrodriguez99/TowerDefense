@@ -11,6 +11,9 @@ Builds/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
+My Project/.vs/*
+My Project/.vsconfig*
+My Project/UserSettings/*
 ExportedObj/
 obj/
 *.svd
