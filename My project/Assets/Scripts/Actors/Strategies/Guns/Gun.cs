@@ -14,25 +14,35 @@ public class Gun : MonoBehaviour, IGun
     [SerializeField] private int _magSize = 20;
 
     public int CurrentBulletCount => _currentBulletCount;
-    [SerializeField] private int _currentBulletCount = 0;
+    [SerializeField] private int _currentBulletCount = 10;
 
     public float ShotCooldown => _shotCooldown;
     [SerializeField] private float _shotCooldown = .5f;
-    private float _currentCooldown = 0;
+    private float _currentShotCooldown = 0;
 
     public virtual void Attack()
     {
-        Instantiate(BulletPrefab, transform.position, transform.rotation);
+        Debug.Log(_currentShotCooldown);
+        if (ShotCooldownIsOver() && HasBullets())
+        {
+            Instantiate(BulletPrefab, transform.position, transform.rotation);
+            _currentShotCooldown = _shotCooldown;
+            _currentBulletCount--;
+
+        }
     }
 
     public virtual void Reload() => _currentBulletCount = _magSize;
 
     private void Update()
     {
-        _currentCooldown -= Time.deltaTime;
-        if (_currentCooldown <= 0)
-            _currentCooldown = _shotCooldown;
 
+        if (_currentShotCooldown > 0) _currentShotCooldown -= Time.deltaTime;
+        
     }
+
+    protected bool HasBullets() => _currentBulletCount > 0;
+
+    protected bool ShotCooldownIsOver() => _currentShotCooldown <= 0;
 
 }

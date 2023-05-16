@@ -15,15 +15,5 @@ public class Pistol : Gun
         base.Reload();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
