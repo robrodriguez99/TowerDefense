@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour, IGun
 
 
     public AudioClip shootingSound;  // Add this line
-    private AudioSource audioSource;  // And this one
+    protected AudioSource audioSource;  // And this one
 
 
     public int Damage => _damage;
@@ -21,11 +21,11 @@ public class Gun : MonoBehaviour, IGun
     public int CurrentBulletCount => _currentBulletCount;
     [SerializeField] private int _currentBulletCount = 10;
 
-    public float ShotCooldown => _shotCooldown;
-    [SerializeField] private float _shotCooldown = 1f;
-    private float _currentShotCooldown = 0;
+    public float ShotCooldown => shotCooldown;
+    [SerializeField] protected float shotCooldown = 1f;
+    protected float currentShotCooldown = 0;
 
-    void Start()
+    protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)  // Add an AudioSource if there isn't one already
@@ -37,11 +37,11 @@ public class Gun : MonoBehaviour, IGun
 
     public virtual void Attack()
     {
-        Debug.Log(_currentShotCooldown);
-        if (ShotCooldownIsOver() && HasBullets())
+        Debug.Log(currentShotCooldown);
+        if (CanShoot())
         {
             Instantiate(BulletPrefab, transform.position, transform.rotation);
-            _currentShotCooldown = _shotCooldown;
+            currentShotCooldown = shotCooldown;
             _currentBulletCount--;
             audioSource.PlayOneShot(shootingSound);  // Add this line
 
@@ -54,12 +54,14 @@ public class Gun : MonoBehaviour, IGun
     private void Update()
     {
 
-        if (_currentShotCooldown > 0) _currentShotCooldown -= Time.deltaTime;
+        if (currentShotCooldown > 0) currentShotCooldown -= Time.deltaTime;
         
     }
 
     protected bool HasBullets() => _currentBulletCount > 0;
 
-    protected bool ShotCooldownIsOver() => _currentShotCooldown <= 0;
+    protected bool ShotCooldownIsOver() => currentShotCooldown <= 0;
+
+    protected bool CanShoot() => HasBullets() && ShotCooldownIsOver();
 
 }
