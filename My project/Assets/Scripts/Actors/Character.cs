@@ -7,7 +7,7 @@ public enum Weapon
     Pistol = 0,
     Shotgun = 1
 }
-
+[RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour, IMovable, IRotable
 {
 

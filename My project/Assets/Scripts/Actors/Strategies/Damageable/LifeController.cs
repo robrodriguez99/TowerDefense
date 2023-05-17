@@ -9,7 +9,7 @@ public class LifeController : MonoBehaviour, IDamageable
     [SerializeField] private int _maxLife = 100;
 
     public int CurrentLife => _currentLife;
-    [SerializeField] private int _currentLife = 0;
+    [SerializeField] private int _currentLife = 100;
 
     public void RecoverLife(int amount) => _currentLife += amount;
 
