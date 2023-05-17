@@ -8,7 +8,7 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
     private LifetimeController _lifetimeController;
 
     public float MovementSpeed => _movementSpeed;
-    [SerializeField] private float _movementSpeed = 30f;
+    [SerializeField] private float _movementSpeed = 100f;
 
     public float Lifetime => _lifetime = 10f;
 
@@ -26,7 +26,7 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
     // Update is called once per frame
     void Update()
     {
-        Move(Vector3.forward);
+        Travel();
         if (_lifetimeController.isLifetimeOver()) Destroy(this.gameObject);
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0056387577, g: 0.0023531427, b: 0.0083307875, a: 1}
+  m_IndirectSpecularColor: {r: 0.0055761803, g: 0.0023517245, b: 0.0082511315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7610,10 +7610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
+  shootingSound: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
   _damage: 10
   _magSize: 20
   _currentBulletCount: 0
-  _shotCooldown: 0.5
+  shotCooldown: 0.3
 --- !u!1001 &947450781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14537,10 +14538,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
+  shootingSound: {fileID: 0}
   _damage: 10
   _magSize: 20
   _currentBulletCount: 0
-  _shotCooldown: 0.5
+  shotCooldown: 0.3
   _bulletsPerShell: 5
 --- !u!4 &1806211886 stripped
 Transform:
