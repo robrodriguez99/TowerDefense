@@ -7,5 +7,7 @@ public interface IBullet
    float Lifetime { get; }
 
    void Travel();
+
+   void OnCollisionEnter(Collision collision);
    
 }

@@ -34,4 +34,11 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
     {
         transform.Translate(direction * _movementSpeed * Time.deltaTime);
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        damageable?.TakeDamage(10);
+        Destroy(this.gameObject);
+    }
 }

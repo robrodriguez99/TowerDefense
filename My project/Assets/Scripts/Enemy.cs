@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : LifeController
 {
   public float speed = 10f;
   
@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.AddComponent<Rigidbody>();
+        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         target = Waypoints.points[0];
     }
 
