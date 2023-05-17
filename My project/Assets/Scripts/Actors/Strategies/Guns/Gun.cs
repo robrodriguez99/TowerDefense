@@ -19,10 +19,10 @@ public class Gun : MonoBehaviour, IGun
     [SerializeField] private int _magSize = 20;
 
     public int CurrentBulletCount => _currentBulletCount;
-    [SerializeField] private int _currentBulletCount = 10;
+    [SerializeField] private int _currentBulletCount;
 
     public float ShotCooldown => shotCooldown;
-    [SerializeField] protected float shotCooldown = 1f;
+    [SerializeField] protected float shotCooldown = .3f;
     protected float currentShotCooldown = 0;
 
     protected virtual void Start()
@@ -32,6 +32,7 @@ public class Gun : MonoBehaviour, IGun
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        _currentBulletCount = _magSize;
     }
 
 
@@ -40,12 +41,8 @@ public class Gun : MonoBehaviour, IGun
         Debug.Log(currentShotCooldown);
         if (CanShoot())
         {
-            Instantiate(BulletPrefab, transform.position, transform.rotation);
-            currentShotCooldown = shotCooldown;
-            _currentBulletCount--;
-            audioSource.PlayOneShot(shootingSound);  // Add this line
-
-
+            Shoot();
+            audioSource.PlayOneShot(shootingSound);
         }
     }
 
@@ -53,9 +50,14 @@ public class Gun : MonoBehaviour, IGun
 
     private void Update()
     {
-
         if (currentShotCooldown > 0) currentShotCooldown -= Time.deltaTime;
-        
+    }
+
+    protected virtual void Shoot()
+    {
+        Instantiate(BulletPrefab, transform.position, transform.rotation);
+        currentShotCooldown = shotCooldown;
+        _currentBulletCount--;
     }
 
     protected bool HasBullets() => _currentBulletCount > 0;

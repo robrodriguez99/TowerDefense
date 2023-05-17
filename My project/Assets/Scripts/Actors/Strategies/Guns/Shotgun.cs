@@ -7,27 +7,22 @@ public class Shotgun : Gun
     [SerializeField] private float _bulletsPerShell = 5;
 
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
-        shotCooldown = 2f;
+        shotCooldown = .8f;
     }
 
-    public override void Attack()
+    protected override void Shoot()
     {
-
-        if (CanShoot())
+        currentShotCooldown = shotCooldown;
+        for (int i = 0; i < _bulletsPerShell; i++)
         {
-            currentShotCooldown = shotCooldown;
-            for (int i = 0; i < _bulletsPerShell; i++)
-            {
-                Instantiate(
-                    BulletPrefab,
-                    transform.position + Random.insideUnitSphere * 1,
-                    transform.rotation);
-            }
-            audioSource.PlayOneShot(shootingSound);  // Add this line
+            Instantiate(
+                BulletPrefab,
+                transform.position + Random.insideUnitSphere * 1,
+                transform.rotation);
         }
-
     }
+
 }
