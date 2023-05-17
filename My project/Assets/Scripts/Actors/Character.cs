@@ -17,10 +17,17 @@ public class Character : MonoBehaviour, IMovable, IRotable
     [SerializeField] private float _rotationSpeed = 15f;
     public float MovementSpeed =>  _movementSpeed;
     [SerializeField] private float _movementSpeed = 5f;
+    private CharacterController _characterController;
+
+    private void Awake()
+    {
+        _characterController = GetComponent<CharacterController>();
+    }
 
     public void Move(Vector3 direction)
     {
-        transform.Translate(direction * _movementSpeed * Time.deltaTime);
+        Vector3 displacement = transform.forward * direction.z * _movementSpeed * Time.deltaTime;
+        _characterController.Move(displacement);
     }
 
     public void Rotation(Vector3 direction)
@@ -37,7 +44,7 @@ public class Character : MonoBehaviour, IMovable, IRotable
     void Update()
     {
         //Move fwd and bkw
-        Move(Vector3.forward * Input.GetAxis("Vertical"));
+        Move(new Vector3(0, 0, Input.GetAxis("Vertical")));
         Rotation(Vector3.up * Input.GetAxis("Horizontal"));
 
 
