@@ -357,7 +357,7 @@
 "Assets/Scripts/Actors/Strategies/Damageable/LifeController.cs"
 "Assets/Scripts/Actors/Strategies/Guns/Gun.cs"
 "Assets/Scripts/Actors/Strategies/Guns/IGun.cs"
-"Assets/Scripts/Actors/Strategies/Guns/Pistol.cs"
+"Assets/Scripts/Actors/Strategies/Guns/LaserPistol.cs"
 "Assets/Scripts/Actors/Strategies/Guns/Shotgun.cs"
 "Assets/Scripts/Actors/Turret.cs"
 "Assets/Scripts/GlobalScripts/GlobalVictory.cs"

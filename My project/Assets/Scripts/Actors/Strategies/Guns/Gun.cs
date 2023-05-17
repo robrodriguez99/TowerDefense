@@ -7,6 +7,11 @@ public class Gun : MonoBehaviour, IGun
     public GameObject BulletPrefab => _bulletPrefab;
     [SerializeField] private GameObject _bulletPrefab;
 
+
+    public AudioClip shootingSound;  // Add this line
+    private AudioSource audioSource;  // And this one
+
+
     public int Damage => _damage;
     [SerializeField] private int _damage = 10;
 
@@ -17,8 +22,18 @@ public class Gun : MonoBehaviour, IGun
     [SerializeField] private int _currentBulletCount = 10;
 
     public float ShotCooldown => _shotCooldown;
-    [SerializeField] private float _shotCooldown = .5f;
+    [SerializeField] private float _shotCooldown = 1f;
     private float _currentShotCooldown = 0;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)  // Add an AudioSource if there isn't one already
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
 
     public virtual void Attack()
     {
@@ -28,6 +43,8 @@ public class Gun : MonoBehaviour, IGun
             Instantiate(BulletPrefab, transform.position, transform.rotation);
             _currentShotCooldown = _shotCooldown;
             _currentBulletCount--;
+            audioSource.PlayOneShot(shootingSound);  // Add this line
+
 
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Weapon
 {
-    Pistol = 0,
+    LaserPistol = 0,
     Shotgun = 1
 }
 [RequireComponent(typeof(CharacterController))]
@@ -37,7 +37,7 @@ public class Character : MonoBehaviour, IMovable, IRotable
     // Start is called before the first frame update
     void Start()
     {
-        EquipWeapon(Weapon.Pistol);
+        EquipWeapon(Weapon.LaserPistol);
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class Character : MonoBehaviour, IMovable, IRotable
         if (Input.GetKeyDown(KeyCode.R)) _currentWeapon.Reload();
 
         //Equipar arma
-        if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.Pistol);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
     }

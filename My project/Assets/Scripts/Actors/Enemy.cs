@@ -9,9 +9,10 @@ public class Enemy : LifeController
 
     void Start()
     {
-        this.gameObject.AddComponent<Rigidbody>();
-        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        //this.gameObject.AddComponent<Rigidbody>();
+       // this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         this.gameObject.AddComponent<BoxCollider>();
+        this.gameObject.GetComponent<BoxCollider>().size = Vector3.one * 4;
 
         target = Waypoints.points[0];
     }
