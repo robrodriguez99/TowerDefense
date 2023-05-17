@@ -1,4 +1,6 @@
-/[Ll]ibrary/*
+[Ll]ibrary/
+/[Ll]ibrary/
+[Uu]serSettings/
 /[Uu]serSettings/
 [Tt]emp/
 [Oo]bj/
