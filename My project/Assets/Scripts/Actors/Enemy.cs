@@ -11,6 +11,8 @@ public class Enemy : LifeController
     {
         this.gameObject.AddComponent<Rigidbody>();
         this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        this.gameObject.AddComponent<BoxCollider>();
+
         target = Waypoints.points[0];
     }
 

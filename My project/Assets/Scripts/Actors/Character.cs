@@ -55,8 +55,6 @@ public class Character : MonoBehaviour, IMovable, IRotable
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.Pistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
-
-
     }
 
     private void EquipWeapon(Weapon weaponIdx)
