@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WayPoint
   - Enemy
+  - Music
   layers:
   - Default
   - TransparentFX

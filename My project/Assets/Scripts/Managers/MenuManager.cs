@@ -7,10 +7,13 @@ using System.ComponentModel;
 public enum UnityScenes
 
 {
-  [Description("Menu")]
-  Menu,
+  [Description("MainMenu")]
+  MainMenu,
   [Description("Level1")]
   Level1,
+  [Description("Settings")]
+  Settings,
+
   [Description("EndGame")]
     EndGame,
 }
@@ -18,7 +21,9 @@ public enum UnityScenes
 public class MenuManager : MonoBehaviour
 {
     public void ActionPlay() => SceneManager.LoadScene(UnityScenes.Level1.ToString());
-    public void ActionConfig() => SceneManager.LoadScene("Config");
+    public void ActionSettings() => SceneManager.LoadScene(UnityScenes.Settings.ToString());
+
+    public void ActionMenu() => SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     public void ActionExit() => Application.Quit();
 
 }

@@ -19,5 +19,5 @@ public class EndGameManager : MonoBehaviour
         _background.sprite = GlobalVictory.Instance.IsVictory ? _victorySprite : _defeatSprite;
     }
 
-    public void ActionMainMenu() => SceneManager.LoadScene(UnityScenes.Menu.ToString());
+    public void ActionMainMenu() => SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
 }
