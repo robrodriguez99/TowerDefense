@@ -7,6 +7,7 @@ public class Enemy : Actor
   
   private Transform target;
   private int wavepointIndex = 0;
+    private int _damage = 10;
 
     protected override void Start()
     {   
@@ -36,6 +37,16 @@ public class Enemy : Actor
 
         wavepointIndex++;
         target = Waypoints.points[wavepointIndex];
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Finish")
+        {
+            GameObject character = GameObject.FindWithTag("Player");
+            character?.GetComponent<LifeController>().TakeDamage(_damage);
+            Destroy(this.gameObject);
+        }
     }
 
 }

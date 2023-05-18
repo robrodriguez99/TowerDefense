@@ -17,6 +17,8 @@ public class Character : Actor
 
     private MovementController _movementController;
 
+    private TraderController _traderController;
+
     private CharacterController _characterController;
     [SerializeField] public GameObject pauseMenu;
 
@@ -35,6 +37,7 @@ public class Character : Actor
         EquipWeapon(Weapon.LaserPistol);
         _movementController = GetComponent<MovementController>();
         _characterController = GetComponent<CharacterController>();
+        _traderController = GetComponent<TraderController>();
         _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
         _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
         _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
