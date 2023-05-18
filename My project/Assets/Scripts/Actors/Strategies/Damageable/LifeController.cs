@@ -15,6 +15,7 @@ public class LifeController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage) {
         _currentLife -= damage;
+        Debug.Log("Took damage, current Life: " + _currentLife);
         if (!IsAlive()) Die();
      }
 
@@ -22,6 +23,7 @@ public class LifeController : MonoBehaviour, IDamageable
     void Start()
     {
         _currentLife = _maxLife;
+        Debug.Log("Curr Life: " + _currentLife);
     }
 
     public bool IsAlive() => _currentLife > 0;

@@ -38,7 +38,6 @@ public class Gun : MonoBehaviour, IGun
 
     public virtual void Attack()
     {
-        Debug.Log(currentShotCooldown);
         if (CanShoot())
         {
             Shoot();
