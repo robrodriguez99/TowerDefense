@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerActorStats
   m_EditorClassIdentifier: 
   _statValues:
-    MaxLife: 0
-    MovementSpeed: 0
-    RotationSpeed: 0
+    MaxLife: 100
+    MovementSpeed: 50
+    RotationSpeed: 80
