@@ -32,8 +32,9 @@ public class Character : Actor
     private CmdReload _cmdReload;
 
     // Start is called before the first frame update
-    void Start()
+     protected override void Start()
     {
+        base.Start();
         EquipWeapon(Weapon.LaserPistol);
         _movementController = GetComponent<MovementController>();
         _characterController = GetComponent<CharacterController>();
@@ -46,6 +47,7 @@ public class Character : Actor
         _cmdReload = new CmdReload(_currentWeapon);
 
         EventManager.instance.onRewardEarned += OnRewardEarned;
+        EventManager.instance.onEnemySuccess += OnEnemySuccess;
 
     }
 
@@ -117,5 +119,7 @@ public class Character : Actor
     }
 
     private void OnRewardEarned(int amount) => _transactionController.Earn(amount);
+
+    private void OnEnemySuccess(int damage) => _lifeController.TakeDamage(damage);
 
 }

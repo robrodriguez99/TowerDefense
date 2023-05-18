@@ -5,8 +5,8 @@ public class Enemy : Actor
 {
   public float speed = 10f;
   
-  private Transform target;
-  private int wavepointIndex = 0;
+    private Transform target;
+    private int wavepointIndex = 0;
     private int _damage = 10;
 
     protected override void Start()
@@ -43,8 +43,8 @@ public class Enemy : Actor
     {
         if(collision.gameObject.tag == "Finish")
         {
-            GameObject character = GameObject.FindWithTag("Player");
-            character?.GetComponent<LifeController>().TakeDamage(_damage);
+            Debug.Log("AAAAAAAAAAAAAAA");
+            EventManager.instance.ActionEnemySuccess(_damage);
             Destroy(this.gameObject);
         }
     }
