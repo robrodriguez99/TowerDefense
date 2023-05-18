@@ -5,11 +5,14 @@ using UnityEngine;
 public class Shotgun : Gun
 {
     [SerializeField] private float _bulletsPerShell = 5;
+    GameObject _bulletHole;
 
 
     protected override void Start()
     {
         base.Start();
+        //For bullets placement
+        _bulletHole = GameObject.Find("Shotgun_Bullet_Hole"); ;
     }
 
     protected override void Shoot()
@@ -19,7 +22,7 @@ public class Shotgun : Gun
         {
             Instantiate(
                 BulletPrefab,
-                transform.position + Random.insideUnitSphere * 1,
+                _bulletHole.transform.position + Random.insideUnitSphere * .5f,
                 transform.rotation);
         }
     }
