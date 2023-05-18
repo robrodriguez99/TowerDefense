@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunStats
   m_EditorClassIdentifier: 
   _gunStats:
-    bulletPrefab: {fileID: 0}
+    bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
     Damage: 5
     MagSize: 20
     ShotCooldown: 0.7
