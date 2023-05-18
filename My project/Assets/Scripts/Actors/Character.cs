@@ -17,7 +17,7 @@ public class Character : Actor
 
     private MovementController _movementController;
 
-    private TransactionController _traderController;
+    private TransactionController _transactionController;
 
     private CharacterController _characterController;
     [SerializeField] public GameObject pauseMenu;
@@ -37,13 +37,15 @@ public class Character : Actor
         EquipWeapon(Weapon.LaserPistol);
         _movementController = GetComponent<MovementController>();
         _characterController = GetComponent<CharacterController>();
-        _traderController = GetComponent<TransactionController>();
+        _transactionController = GetComponent<TransactionController>();
         _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
         _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
         _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
         _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
+
+        EventManager.instance.onRewardEarned += OnRewardEarned;
 
     }
 
@@ -113,5 +115,7 @@ public class Character : Actor
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
     }
+
+    private void OnRewardEarned(int amount) => _transactionController.Earn(amount);
 
 }

@@ -28,8 +28,10 @@ public class EventManager : MonoBehaviour
     public event Action<int, int> OnAmmoChange;
     public event Action<float, float> OnCharacterLifeChange;
     public void ActionCharacterLifeChange(float currentLife, float maxLife) => OnCharacterLifeChange(currentLife, maxLife);
-    public void ActionOnRewardEarned(int amount) => 
+    
     public event Action<int> onRewardEarned;
+    public void ActionOnRewardEarned(int amount) => onRewardEarned(10);
+
     public event Action<int> OnWeaponChange;
     // public event Action OnAvatarChange;
 

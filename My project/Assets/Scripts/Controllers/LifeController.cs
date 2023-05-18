@@ -33,6 +33,4 @@ public class LifeController : MonoBehaviour, IDamageable
         if (!isMainCharacter) EventManager.instance.ActionOnRewardEarned(10);
         Destroy(this.gameObject);
     }
-
-    void GiveReward(int amount) => GameObject.FindWithTag("Player").GetComponent<TransactionController>().Earn(amount);
 }
