@@ -56,11 +56,6 @@ public class Turret : Gun, IRotable {
 		currentShotCooldown -= Time.deltaTime;
 		if (target == null)
 			return;
-
-		//Target lock on
-		//Vector3 dir = target.position - transform.position;
-		//Quaternion lookRotation = Quaternion.LookRotation(dir);
-		//Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * _rotationSpeed).eulerAngles;
 		partToRotate.LookAt(target);
 		Attack();
 	}

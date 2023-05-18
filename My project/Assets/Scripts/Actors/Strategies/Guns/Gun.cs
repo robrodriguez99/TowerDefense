@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour, IGun
@@ -10,8 +8,8 @@ public class Gun : MonoBehaviour, IGun
     public GameObject BulletPrefab => _gunStats.BulletPrefab;
 
 
-    public AudioClip shootingSound;  // Add this line
-    protected AudioSource audioSource;  // And this one
+    public AudioClip shootingSound;  
+    protected AudioSource audioSource; 
 
 
     public int Damage => _gunStats.Damage;
@@ -54,7 +52,8 @@ public class Gun : MonoBehaviour, IGun
 
     protected virtual void Shoot()
     {
-        Instantiate(BulletPrefab, transform.position, transform.rotation);
+        GameObject gunBulletHole = GameObject.Find("Gun_Bullet_Hole");
+        Instantiate(BulletPrefab, gunBulletHole.transform.position, transform.rotation);
         currentShotCooldown = ShotCooldown;
         _currentBulletCount--;
     }

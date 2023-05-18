@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0056387577, g: 0.0023531427, b: 0.0083307875, a: 1}
+  m_IndirectSpecularColor: {r: 0.0055761803, g: 0.0023517245, b: 0.0082511315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8400,12 +8400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68e5527f896f8a44a6a1881b3fb9de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
+  _gunStats: {fileID: 11400000, guid: 7db24bb87ef15ab408f0b82338e8ee42, type: 2}
   shootingSound: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
-  _damage: 10
-  _magSize: 20
   _currentBulletCount: 0
-  shotCooldown: 0.3
 --- !u!1001 &947450781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15536,6 +15533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10e0fcfe18d3d946a78b253517c5a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actorStats: {fileID: 11400000, guid: ffdfbde111fb76c4dacc9f07edd917cd, type: 2}
+  _lifeController: {fileID: 0}
   _availableWeapons:
   - {fileID: 939266088}
   - {fileID: 1805014103}
@@ -15655,7 +15654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb5b1cd77299a947aa1b93bc1e82858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 100
   _currentLife: 0
 --- !u!114 &1722034284
 MonoBehaviour:
@@ -16339,12 +16337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec0874291d7ac740a007b4fcc307bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
+  _gunStats: {fileID: 11400000, guid: b767d21210528fa4891dda9595842a67, type: 2}
   shootingSound: {fileID: 0}
-  _damage: 10
-  _magSize: 20
   _currentBulletCount: 0
-  shotCooldown: 0.3
   _bulletsPerShell: 5
 --- !u!4 &1806211886 stripped
 Transform:
@@ -16545,7 +16540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e16767fb8f656418777c5e55d8573d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 779270197}
 --- !u!1001 &1827835901
 PrefabInstance:
   m_ObjectHideFlags: 0
