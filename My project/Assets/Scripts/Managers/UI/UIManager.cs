@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
    // Properties
     [SerializeField] private Image _healthBar;
+    [SerializeField] private Image _weapon;
+    [SerializeField] private Text _ammoText;
 
     // [SerializeField] private Text _scoreText;
 
