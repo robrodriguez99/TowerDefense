@@ -5,9 +5,9 @@ using UnityEngine;
 public class MovementController : MonoBehaviour, IMovable, IRotable
 {
 
-    public float MovementSpeed => GetComponent<ActorStats>().MovementSpeed;
+    public float MovementSpeed => 15f;
 
-    public float RotationSpeed => GetComponent<ActorStats>().RotationSpeed;
+    public float RotationSpeed => 30f;
 
     public void Move(Vector3 direction)
     {

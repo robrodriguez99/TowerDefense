@@ -9,39 +9,39 @@ public enum Weapon
     Shotgun = 1
 }
 [RequireComponent(typeof(CharacterController))]
-public class Character : Actor, IMovable, IRotable
+public class Character : MonoBehaviour
 {
 
     [SerializeField] private List<Gun> _availableWeapons;
     [SerializeField] private Gun _currentWeapon;
-    public float RotationSpeed => _rotationSpeed;
-    [SerializeField] private float _rotationSpeed = 15f;
-    public float MovementSpeed =>  _movementSpeed;
-    [SerializeField] private float _movementSpeed = 5f;
+
+    private MovementController _movementController;
+
     private CharacterController _characterController;
     [SerializeField] public GameObject pauseMenu;
 
-    Vector2 turn;
+    private CmdMovement _cmdMoveForward;
+    private CmdMovement _cmdMoveBackwards;
+    private CmdRotation _cmdRotateLeft;
+    private CmdRotation _cmdRotateRight;
 
-    private void Awake()
-    {
-        _characterController = GetComponent<CharacterController>();
-    }
 
-    public void Move(Vector3 direction)
-    {
-        Vector3 displacement = transform.forward * direction.z * _movementSpeed * Time.deltaTime;
-        _characterController.Move(displacement);
-    }
+    private CmdAttack _cmdAttack;
+    private CmdReload _cmdReload;
 
-    public void Rotation(Vector3 direction)
-    {
-        transform.Rotate(direction * _rotationSpeed * Time.deltaTime);
-    }
     // Start is called before the first frame update
     void Start()
     {
         EquipWeapon(Weapon.LaserPistol);
+        _movementController = GetComponent<MovementController>();
+        _characterController = GetComponent<CharacterController>();
+        _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
+        _cmdMoveBackwards = new CmdMovement(_movementController, -Vector3.forward);
+        _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
+        _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
+        _cmdAttack = new CmdAttack(_currentWeapon);
+        _cmdReload = new CmdReload(_currentWeapon);
+
     }
 
     // Update is called once per frame
@@ -49,17 +49,20 @@ public class Character : Actor, IMovable, IRotable
     {
 
         //Move fwd and bkw
-        Move(new Vector3(0, 0, Input.GetAxis("Vertical")));
+        if (Input.GetKey(KeyCode.W)) _cmdMoveForward.Execute();
+        if(Input.GetKey(KeyCode.S)) _cmdMoveBackwards.Execute();
+
+        if (Input.GetKey(KeyCode.A)) _cmdRotateLeft.Execute();
+        if (Input.GetKey(KeyCode.D)) _cmdRotateRight.Execute();
 
 
-        if (Input.GetAxis("Fire1") > 0) _currentWeapon.Attack();
-        if (Input.GetKeyDown(KeyCode.R)) _currentWeapon.Reload();
+        if (Input.GetAxis("Fire1") > 0) _cmdAttack.Execute();
+        if (Input.GetKeyDown(KeyCode.R)) _cmdReload.Execute();
 
         //Equipar arma
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
-        transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * 20 * Time.deltaTime);
 
 
          // Pause game
@@ -102,6 +105,8 @@ public class Character : Actor, IMovable, IRotable
 
         _currentWeapon = _availableWeapons[(int) weaponIdx];
         _currentWeapon.gameObject.SetActive(true);
+        _cmdAttack = new CmdAttack(_currentWeapon);
+        _cmdReload = new CmdReload(_currentWeapon);
     }
 
 }

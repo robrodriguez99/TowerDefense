@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2609848948460241735}
   - component: {fileID: 2609848948460241733}
   - component: {fileID: 5548574599968818376}
+  - component: {fileID: 9033055546778947709}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -100,10 +101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actorStats: {fileID: 11400000, guid: ffdfbde111fb76c4dacc9f07edd917cd, type: 2}
+  _lifeController: {fileID: 0}
   _availableWeapons: []
   _currentWeapon: {fileID: 0}
   _rotationSpeed: 50
   _movementSpeed: 4
+  pauseMenu: {fileID: 0}
 --- !u!143 &5548574599968818376
 CharacterController:
   m_ObjectHideFlags: 0
@@ -122,6 +125,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9033055546778947709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609848948460241732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee4a7b04d17516469d01063a61a45b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2609848949687383924
 GameObject:
   m_ObjectHideFlags: 0

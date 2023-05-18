@@ -38,8 +38,10 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
     public void OnCollisionEnter(Collision collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-        Debug.Log("DAMMA");
-        damageable?.TakeDamage(10);
+        if (damageable != null)
+        {
+            new CmdApplyDamage(damageable, 10).Execute();
+        }
         Destroy(this.gameObject);
     }
 }
