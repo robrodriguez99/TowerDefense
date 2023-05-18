@@ -36,7 +36,7 @@ public class Character : Actor
         _movementController = GetComponent<MovementController>();
         _characterController = GetComponent<CharacterController>();
         _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
-        _cmdMoveBackwards = new CmdMovement(_movementController, -Vector3.forward);
+        _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
         _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
         _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
         _cmdAttack = new CmdAttack(_currentWeapon);
