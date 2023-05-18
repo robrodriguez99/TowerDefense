@@ -215,12 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afda8e7d2989b0d4893a618c6bb270a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 4803195870135463313, guid: 9fae4d88cc6450e4286957da9f0835a7, type: 3}
+  _gunStats: {fileID: 11400000, guid: 3045c4e1bbe7fc940967689ddf513bf4, type: 2}
   shootingSound: {fileID: 8300000, guid: 5ff5bd936a30a904da907f35c8dd382e, type: 3}
-  _damage: 10
-  _magSize: 20
   _currentBulletCount: 10
-  shotCooldown: 0.5
   range: 15
   fireRate: 1
   enemyTag: Enemy

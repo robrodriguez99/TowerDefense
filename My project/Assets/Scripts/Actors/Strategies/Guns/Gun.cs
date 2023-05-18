@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour, IGun
 {
-    public GameObject BulletPrefab => _bulletPrefab;
-    [SerializeField] private GameObject _bulletPrefab;
+
+    [SerializeField] protected GunStats _gunStats;
+
+    public GameObject BulletPrefab => _gunStats.BulletPrefab;
 
 
     public AudioClip shootingSound;  // Add this line
     protected AudioSource audioSource;  // And this one
 
 
-    public int Damage => _damage;
-    [SerializeField] private int _damage = 10;
+    public int Damage => _gunStats.Damage;
 
-    public int MagSize => _magSize;
-    [SerializeField] private int _magSize = 20;
+    public int MagSize => _gunStats.MagSize;
 
     public int CurrentBulletCount => _currentBulletCount;
     [SerializeField] private int _currentBulletCount;
 
-    public float ShotCooldown => shotCooldown;
-    [SerializeField] protected float shotCooldown = .3f;
+    public float ShotCooldown => _gunStats.ShotCooldown;
+
     protected float currentShotCooldown = 0;
 
     protected virtual void Start()
@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour, IGun
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-        _currentBulletCount = _magSize;
+        _currentBulletCount = MagSize;
     }
 
 
@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour, IGun
         }
     }
 
-    public virtual void Reload() => _currentBulletCount = _magSize;
+    public virtual void Reload() => _currentBulletCount = MagSize;
 
     private void Update()
     {
@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour, IGun
     protected virtual void Shoot()
     {
         Instantiate(BulletPrefab, transform.position, transform.rotation);
-        currentShotCooldown = shotCooldown;
+        currentShotCooldown = ShotCooldown;
         _currentBulletCount--;
     }
 

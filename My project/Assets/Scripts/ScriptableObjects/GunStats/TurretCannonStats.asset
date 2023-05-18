@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e7743b7bad76a428b4cfb0419aa7b7, type: 3}
-  m_Name: PlayerActorStats
+  m_Script: {fileID: 11500000, guid: 29a7cdaa7e2bc304f976ad260259e41d, type: 3}
+  m_Name: TurretCannonStats
   m_EditorClassIdentifier: 
-  _statValues:
-    MaxLife: 0
-    MovementSpeed: 0
-    RotationSpeed: 0
+  _gunStats:
+    bulletPrefab: {fileID: 0}
+    Damage: 0
+    MagSize: 0
+    ShotCooldown: 0
