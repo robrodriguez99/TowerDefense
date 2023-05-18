@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class UIManager : MonoBehaviour
@@ -9,7 +10,9 @@ public class UIManager : MonoBehaviour
    // Properties
     [SerializeField] private Image _healthBar;
     [SerializeField] private Image _weapon;
-    [SerializeField] private Text _ammoText;
+    [SerializeField] private TextMeshProUGUI _ammoText;
+
+    [SerializeField] private List<Sprite> _weaponSprites;
 
     // [SerializeField] private Text _scoreText;
 
@@ -19,11 +22,24 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EventManager.instance.OnCharacterLifeChange += OnCharacterLifeChange;
+        EventManager.instance.OnWeaponChange += OnWeaponChange;
+        EventManager.instance.OnAmmoChange += OnAmmoChange;
        
     }
     private void OnCharacterLifeChange(float currentLife, float maxLife)
     {
         _healthBar.fillAmount = currentLife / maxLife;
     }
+
+    private void OnWeaponChange(int weaponIndex)
+    {
+        _weapon.sprite = _weaponSprites[weaponIndex];
+    }
+
+    private void OnAmmoChange(int currentAmmo, int maxAmmo)
+    {
+        _ammoText.text = $"{currentAmmo}" + "/" + $"{maxAmmo}";
+    }
+
 
 }

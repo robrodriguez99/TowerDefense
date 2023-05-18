@@ -24,6 +24,7 @@ public class Shotgun : Gun
                 BulletPrefab,
                 _bulletHole.transform.position + Random.insideUnitSphere * .5f,
                 transform.rotation);
+            EventManager.instance.ActionAmmoChange(CurrentBulletCount, MagSize);
         }
     }
 

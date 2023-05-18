@@ -43,7 +43,11 @@ public class Gun : MonoBehaviour, IGun
         }
     }
 
-    public virtual void Reload() => _currentBulletCount = MagSize;
+    public virtual void Reload() 
+    {
+        _currentBulletCount = MagSize;
+        EventManager.instance.ActionAmmoChange(_currentBulletCount, MagSize);
+    }
 
     private void Update()
     {
@@ -56,6 +60,8 @@ public class Gun : MonoBehaviour, IGun
         Instantiate(BulletPrefab, gunBulletHole.transform.position, transform.rotation);
         currentShotCooldown = ShotCooldown;
         _currentBulletCount--;
+
+        EventManager.instance.ActionAmmoChange(_currentBulletCount, MagSize);
     }
 
     protected bool HasBullets() => _currentBulletCount > 0;

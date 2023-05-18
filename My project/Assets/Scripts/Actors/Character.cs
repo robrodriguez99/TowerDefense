@@ -116,6 +116,9 @@ public class Character : Actor
         _currentWeapon.gameObject.SetActive(true);
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
+
+        EventManager.instance.ActionWeaponChange((int) weaponIdx);
+
     }
 
     private void OnRewardEarned(int amount) => _transactionController.Earn(amount);
