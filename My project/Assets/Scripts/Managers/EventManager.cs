@@ -27,28 +27,29 @@ public class EventManager : MonoBehaviour
     #region IN_GAME_UI
     public event Action<int, int> OnAmmoChange;
     public event Action<float, float> OnCharacterLifeChange;
+    public void ActionCharacterLifeChange(float currentLife, float maxLife) => OnCharacterLifeChange(currentLife, maxLife);
     public event Action<int> OnCoinPickup;
     public event Action<int> OnWeaponChange;
-    public event Action OnAvatarChange;
+    // public event Action OnAvatarChange;
 
     public void AmmoChange(int currentAmmo, int maxAmmo)
     {
         if (OnAmmoChange != null) OnAmmoChange(currentAmmo, maxAmmo);
     }
 
-    public void CharacterLifeChange(float currentLife, float maxLife)
-    {
-        if (OnCharacterLifeChange != null) OnCharacterLifeChange(currentLife, maxLife);
-    }
+    // public void ActionCharacterLifeChange(float currentLife, float maxLife)
+    // {
+    //     if (OnCharacterLifeChange != null) OnCharacterLifeChange(currentLife, maxLife);
+    // }
 
     public void WeaponChange(int weaponIndex)
     {
         if (OnWeaponChange != null) OnWeaponChange(weaponIndex);
     }
 
-    public void AvatarChange()
-    {
-        if (OnAvatarChange != null) OnAvatarChange();
-    }
+    // public void AvatarChange()
+    // {
+    //     if (OnAvatarChange != null) OnAvatarChange();
+    // }
     #endregion
 }

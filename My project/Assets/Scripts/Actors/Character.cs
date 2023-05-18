@@ -63,6 +63,8 @@ public class Character : Actor
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
+        if (Input.GetKeyDown(KeyCode.F2)) GetComponent<LifeController>().TakeDamage(10);
+
 
 
          // Pause game
