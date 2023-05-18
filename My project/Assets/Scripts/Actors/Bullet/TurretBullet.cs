@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TurretBullet : MonoBehaviour, IBullet, IMovable {
+public class TurretBullet : MonoBehaviour, IBullet, IMovable, IRotable {
 
 	private Transform target;
 
@@ -9,7 +9,10 @@ public class TurretBullet : MonoBehaviour, IBullet, IMovable {
     public float Lifetime => throw new System.NotImplementedException();
 
 	public float MovementSpeed => _movementSpeed;
-	[SerializeField] private float _movementSpeed = 100f;
+
+    public float RotationSpeed => throw new System.NotImplementedException();
+
+    [SerializeField] private float _movementSpeed = 100f;
 
     public void Seek (Transform _target)
 	{
@@ -24,18 +27,8 @@ public class TurretBullet : MonoBehaviour, IBullet, IMovable {
 			return;
 		}
 
-        
-            // Calculate direction towards the target
-            Vector3 direction = target.position - transform.position;
-            direction.Normalize();
+        Move(target.position - transform.position);
 
-            // Rotate towards the target
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
-
-            // Move towards the target
-            transform.Translate(direction * _movementSpeed * Time.deltaTime, Space.World);
-        
     }
 
 	void HitTarget ()
@@ -52,14 +45,26 @@ public class TurretBullet : MonoBehaviour, IBullet, IMovable {
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided");
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        IDamageable damageable = collision.gameObject.GetComponent<Actor>()._lifeController;
         damageable?.TakeDamage(30);
 		HitTarget();
     }
 
     public void Move(Vector3 direction)
     {
-        transform.Translate(direction * _movementSpeed * Time.deltaTime);
+        direction.Normalize();
+
+        // Rotate towards the target
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
+
+        // Move towards the target
+        transform.Translate(direction * _movementSpeed * Time.deltaTime, Space.World);
+
+    }
+
+    public void Rotation(Vector3 direction)
+    {
+        throw new System.NotImplementedException();
     }
 }

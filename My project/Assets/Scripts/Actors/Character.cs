@@ -8,7 +8,7 @@ public enum Weapon
     Shotgun = 1
 }
 [RequireComponent(typeof(CharacterController))]
-public class Character : MonoBehaviour, IMovable, IRotable
+public class Character : Actor, IMovable, IRotable
 {
 
     [SerializeField] private List<Gun> _availableWeapons;
@@ -18,6 +18,8 @@ public class Character : MonoBehaviour, IMovable, IRotable
     public float MovementSpeed =>  _movementSpeed;
     [SerializeField] private float _movementSpeed = 5f;
     private CharacterController _characterController;
+
+    Vector2 turn;
 
     private void Awake()
     {
@@ -43,9 +45,9 @@ public class Character : MonoBehaviour, IMovable, IRotable
     // Update is called once per frame
     void Update()
     {
+
         //Move fwd and bkw
         Move(new Vector3(0, 0, Input.GetAxis("Vertical")));
-        Rotation(Vector3.up * Input.GetAxis("Horizontal"));
 
 
         if (Input.GetAxis("Fire1") > 0) _currentWeapon.Attack();
@@ -54,6 +56,9 @@ public class Character : MonoBehaviour, IMovable, IRotable
         //Equipar arma
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
+
+        transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * 20 * Time.deltaTime);
+
 
     }
 

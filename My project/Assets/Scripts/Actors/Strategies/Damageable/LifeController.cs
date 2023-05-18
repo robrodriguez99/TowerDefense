@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour, IDamageable
 {
-    public int MaxLife => _maxLife;
+
+    public int MaxLife => GetComponent<ActorStats>().MaxLife;
     [SerializeField] private int _maxLife = 100;
 
     public int CurrentLife => _currentLife;
@@ -14,16 +15,15 @@ public class LifeController : MonoBehaviour, IDamageable
     public void RecoverLife(int amount) => _currentLife += amount;
 
     public void TakeDamage(int damage) {
+        Debug.Log("Taking damage");
         _currentLife -= damage;
-        Debug.Log("Took damage, current Life: " + _currentLife);
         if (!IsAlive()) Die();
      }
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentLife = _maxLife;
-        Debug.Log("Curr Life: " + _currentLife);
+        _currentLife = MaxLife;
     }
 
     public bool IsAlive() => _currentLife > 0;

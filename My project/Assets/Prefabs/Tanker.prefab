@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -2212052343627093833}
   - component: {fileID: 8438334298820731945}
   - component: {fileID: 5944936442159957818}
+  - component: {fileID: 1769600587248996678}
   m_Layer: 0
   m_Name: Tanker
   m_TagString: Enemy
@@ -47,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdb0f18145d7444e845612e0b305646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 100
-  _currentLife: 100
+  _actorStats: {fileID: 11400000, guid: bac3aa6dcb8d0ff419fd832043f3a65b, type: 2}
+  _lifeController: {fileID: 0}
   speed: 10
 --- !u!54 &8438334298820731945
 Rigidbody:
@@ -78,7 +79,21 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1769600587248996678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044101965864496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb5b1cd77299a947aa1b93bc1e82858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLife: 100
+  _currentLife: 100
 --- !u!1 &1204669148233828
 GameObject:
   m_ObjectHideFlags: 0
