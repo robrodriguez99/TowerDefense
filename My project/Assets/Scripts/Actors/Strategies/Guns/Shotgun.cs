@@ -10,12 +10,11 @@ public class Shotgun : Gun
     protected override void Start()
     {
         base.Start();
-        shotCooldown = .8f;
     }
 
     protected override void Shoot()
     {
-        currentShotCooldown = shotCooldown;
+        currentShotCooldown = ShotCooldown;
         for (int i = 0; i < _bulletsPerShell; i++)
         {
             Instantiate(

@@ -18,7 +18,6 @@ public class ActorStats : ScriptableObject
 }
 
 [System.Serializable]
-
 public struct StatValues
 {
     public int MaxLife;

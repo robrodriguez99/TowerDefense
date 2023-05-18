@@ -23,7 +23,6 @@ public class Turret : Gun, IRotable {
     // Use this for initialization
     protected override void Start () {
         base.Start();
-        shotCooldown = .5f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
 	}
 	
@@ -70,7 +69,7 @@ public class Turret : Gun, IRotable {
 	{
 		GameObject bulletGO = Instantiate(BulletPrefab, partToRotate.position, partToRotate.rotation);
 		TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
-        currentShotCooldown = shotCooldown;
+        currentShotCooldown = ShotCooldown;
 
         if (bullet != null)
 			bullet.Seek(target);
