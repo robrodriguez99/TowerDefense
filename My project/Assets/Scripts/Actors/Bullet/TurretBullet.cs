@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class TurretBullet : MonoBehaviour {
+public class TurretBullet : MonoBehaviour, IBullet, IMovable {
 
 	private Transform target;
 
-	public float speed = 70f;
 	public GameObject impactEffect;
-	
-	public void Seek (Transform _target)
+
+    public float Lifetime => throw new System.NotImplementedException();
+
+	public float MovementSpeed => _movementSpeed;
+	[SerializeField] private float _movementSpeed = 100f;
+
+    public void Seek (Transform _target)
 	{
 		target = _target;
 	}
 
-	// Update is called once per frame
 	void Update () {
 
 		if (target == null)
@@ -21,25 +24,42 @@ public class TurretBullet : MonoBehaviour {
 			return;
 		}
 
-		Vector3 dir = target.position - transform.position;
-		float distanceThisFrame = speed * Time.deltaTime;
+        
+            // Calculate direction towards the target
+            Vector3 direction = target.position - transform.position;
+            direction.Normalize();
 
-		if (dir.magnitude <= distanceThisFrame)
-		{
-			HitTarget();
-			return;
-		}
+            // Rotate towards the target
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
 
-		transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-
-	}
+            // Move towards the target
+            transform.Translate(direction * _movementSpeed * Time.deltaTime, Space.World);
+        
+    }
 
 	void HitTarget ()
 	{
 		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
 		Destroy(effectIns, 2f);
-
-		Destroy(target.gameObject);
-		Destroy(gameObject);
+		Destroy(this.gameObject);
 	}
+
+    public void Travel()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collided");
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        damageable?.TakeDamage(30);
+		HitTarget();
+    }
+
+    public void Move(Vector3 direction)
+    {
+        transform.Translate(direction * _movementSpeed * Time.deltaTime);
+    }
 }

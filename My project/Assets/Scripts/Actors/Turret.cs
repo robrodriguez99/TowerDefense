@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Turret : MonoBehaviour {
+public class Turret : Gun, IRotable {
 
 	private Transform target;
 
@@ -9,20 +9,21 @@ public class Turret : MonoBehaviour {
 
 	public float range = 15f;
 	public float fireRate = 1f;
-	private float fireCountdown = 0f;
 
 	[Header("Unity Setup Fields")]
 
 	public string enemyTag = "Enemy";
 
 	public Transform partToRotate;
-	public float turnSpeed = 10f;
-
-	public GameObject bulletPrefab;
 	public Transform firePoint;
 
-	// Use this for initialization
-	void Start () {
+	public float RotationSpeed => _rotationSpeed;
+	[SerializeField] private float _rotationSpeed = 10f;
+
+    // Use this for initialization
+    protected override void Start () {
+        base.Start();
+        shotCooldown = .5f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
 	}
 	
@@ -53,31 +54,25 @@ public class Turret : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		currentShotCooldown -= Time.deltaTime;
 		if (target == null)
 			return;
 
 		//Target lock on
-		Vector3 dir = target.position - transform.position;
-		Quaternion lookRotation = Quaternion.LookRotation(dir);
-		Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-		partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
-
-		if (fireCountdown <= 0f)
-		{
-			Shoot();
-			fireCountdown = 1f / fireRate;
-		}
-
-		fireCountdown -= Time.deltaTime;
-
+		//Vector3 dir = target.position - transform.position;
+		//Quaternion lookRotation = Quaternion.LookRotation(dir);
+		//Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * _rotationSpeed).eulerAngles;
+		partToRotate.LookAt(target);
+		Attack();
 	}
 
-	void Shoot ()
+	protected override void Shoot ()
 	{
-		GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+		GameObject bulletGO = Instantiate(BulletPrefab, partToRotate.position, partToRotate.rotation);
 		TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
+        currentShotCooldown = shotCooldown;
 
-		if (bullet != null)
+        if (bullet != null)
 			bullet.Seek(target);
 	}
 
@@ -86,4 +81,9 @@ public class Turret : MonoBehaviour {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
 	}
+
+    public void Rotation(Vector3 direction)
+    {
+        throw new System.NotImplementedException();
+    }
 }
