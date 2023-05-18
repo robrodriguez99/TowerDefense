@@ -9,7 +9,7 @@ public enum Weapon
     Shotgun = 1
 }
 [RequireComponent(typeof(CharacterController))]
-public class Character : MonoBehaviour
+public class Character : Actor
 {
 
     [SerializeField] private List<Gun> _availableWeapons;

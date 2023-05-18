@@ -6,9 +6,7 @@ using UnityEngine;
 public class LifeController : MonoBehaviour, IDamageable
 {
 
-    public int MaxLife => GetComponent<ActorStats>().MaxLife;
-    [SerializeField] private int _maxLife = 100;
-
+    public int MaxLife => GetComponent<Actor>().ActorStats.MaxLife;
     public int CurrentLife => _currentLife;
     [SerializeField] private int _currentLife = 100;
 

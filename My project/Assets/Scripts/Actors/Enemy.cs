@@ -1,15 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Actor
 {
   public float speed = 10f;
   
   private Transform target;
   private int wavepointIndex = 0;
 
-    void Start()
-    {
+    protected override void Start()
+    {   
+        base.Start();
         target = Waypoints.points[0];
     }
 

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdb0f18145d7444e845612e0b305646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actorStats: {fileID: 11400000, guid: bac3aa6dcb8d0ff419fd832043f3a65b, type: 2}
+  _actorStats: {fileID: 11400000, guid: 186487eac48bd5b488e9993c6a926dbd, type: 2}
   _lifeController: {fileID: 0}
   speed: 10
 --- !u!54 &8438334298820731945
@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb5b1cd77299a947aa1b93bc1e82858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 100
   _currentLife: 100
 --- !u!1 &1204669148233828
 GameObject:

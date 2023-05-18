@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "ActorStats", menuName ="Stats/Actors", order = 0)]
+[CreateAssetMenu(fileName = "ActorStats", menuName ="Stats/Actors/BasicActor", order = 0)]
 public class ActorStats : ScriptableObject
 {
     [SerializeField] private StatValues _statValues;
