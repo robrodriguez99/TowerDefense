@@ -6,16 +6,18 @@ using UnityEngine;
 public class LifeController : MonoBehaviour, IDamageable
 {
 
+
     public int MaxLife => GetComponent<Actor>().ActorStats.MaxLife;
     public int CurrentLife => _currentLife;
     [SerializeField] private int _currentLife = 100;
-
+    [SerializeField] private bool isMainCharacter = false;
     public void RecoverLife(int amount) => _currentLife += amount;
 
     public void TakeDamage(int damage) {
         Debug.Log("Taking damage");
         _currentLife -= damage;
-        EventManager.instance.ActionCharacterLifeChange(_currentLife, MaxLife);
+        if (isMainCharacter)
+            EventManager.instance.ActionCharacterLifeChange(_currentLife, MaxLife);
         if (!IsAlive()) Die();
      }
 
