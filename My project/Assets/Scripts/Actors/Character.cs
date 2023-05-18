@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Weapon
 {
@@ -18,6 +19,7 @@ public class Character : Actor, IMovable, IRotable
     public float MovementSpeed =>  _movementSpeed;
     [SerializeField] private float _movementSpeed = 5f;
     private CharacterController _characterController;
+    [SerializeField] public GameObject pauseMenu;
 
     Vector2 turn;
 
@@ -60,6 +62,35 @@ public class Character : Actor, IMovable, IRotable
         transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * 20 * Time.deltaTime);
 
 
+         // Pause game
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            if (Time.timeScale == 1)
+            {
+                PauseGame();
+            }
+            else if (Time.timeScale == 0)
+            {
+                ResumeGame();
+            }
+        }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1; // This makes the game run at normal speed again
+        pauseMenu.SetActive(false);
+    }
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1; // Ensure that the game is unpaused when you go back to the Main Menu
+        SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     }
 
     private void EquipWeapon(Weapon weaponIdx)
