@@ -30,7 +30,7 @@ public class LifeController : MonoBehaviour, IDamageable
     public bool IsAlive() => _currentLife > 0;
 
     public void Die() {
-        if (!isMainCharacter) GiveReward(10);
+        if (!isMainCharacter) EventManager.instance.ActionOnRewardEarned(10);
         Destroy(this.gameObject);
     }
 
