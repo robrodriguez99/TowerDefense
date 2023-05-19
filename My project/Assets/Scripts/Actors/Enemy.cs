@@ -46,7 +46,7 @@ public class Enemy : Actor
             Destroy(this.gameObject);
         }
 
-        if(objectCollided.tag == "Player")
+        if (objectCollided.tag == "Player")
         {
             IDamageable damageable = objectCollided.GetComponent<IDamageable>();
             if (damageable != null)
