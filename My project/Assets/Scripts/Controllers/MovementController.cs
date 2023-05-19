@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour, IMovable, IRotable
     public float MovementSpeed => _actorStats.MovementSpeed;
     public float RotationSpeed => _actorStats.RotationSpeed;
     private float _verticalSpeed = 0f; // This will store the current vertical speed due to gravity
-    private float _gravity = -9.81f; // You can adjust this to whatever feels right
+    private float _gravity = -9.81f; 
 
     private void Start()
     {
@@ -31,11 +31,13 @@ public class MovementController : MonoBehaviour, IMovable, IRotable
         }
 
         Vector3 verticalMove = new Vector3(0, _verticalSpeed, 0);
-        Vector3 horizontalMove = direction.z * MovementSpeed * Time.deltaTime * transform.forward;
+        Vector3 horizontalMove = direction.z * MovementSpeed * Time.deltaTime * transform.forward +
+                                 direction.x * MovementSpeed * Time.deltaTime * transform.right;
 
         // Move takes into account both horizontal and vertical movement
         _characterController.Move(horizontalMove + verticalMove);
     }
+
 
     public void Rotation(Vector3 direction)
     {
