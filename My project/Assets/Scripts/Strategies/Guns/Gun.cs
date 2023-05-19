@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour, IGun
     public int MagSize => _gunStats.MagSize;
 
     public int CurrentBulletCount => _currentBulletCount;
-    [SerializeField] private int _currentBulletCount;
+    [SerializeField] protected int _currentBulletCount;
 
     public float ShotCooldown => _gunStats.ShotCooldown;
 

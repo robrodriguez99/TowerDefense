@@ -34,7 +34,7 @@ public class Character : Actor
     private CmdAttack _cmdAttack;
     private CmdReload _cmdReload;
 
-    private bool _canBuild = false;
+    private bool _isBuildableSpot = false;
 
     // Start is called before the first frame update
      protected override void Start()
@@ -68,14 +68,7 @@ public class Character : Actor
         {
             // Access the object that was hit
             GameObject objectHit = hit.transform.gameObject;
-
-            // Do something with the object
-            Debug.Log("Object Hit: " + objectHit.name);
-
-            _canBuild = objectHit.tag == "Platform" ? true : false;
-            Debug.Log(_canBuild);
-
-            // Replace this code with the action you want to perform on the object
+            _isBuildableSpot = objectHit.tag == "Platform" ? true : false;
         }
 
         //Move fwd and bkw
@@ -92,7 +85,7 @@ public class Character : Actor
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
-        if(Input.GetKeyDown(KeyCode.O) && _canBuild)
+        if(Input.GetKeyDown(KeyCode.O) && _isBuildableSpot)
         {
             if (_transactionController.Gold < 10)
                 EnableNoMoneyMessage();
@@ -171,8 +164,6 @@ public class Character : Actor
         EventManager.instance.ActionWeaponChange((int) weaponIdx);
         EventManager.instance.ActionAmmoChange(_currentWeapon.CurrentBulletCount, _currentWeapon.MagSize);
     }
-
-
 
     private void OnRewardEarned(int amount)
     {

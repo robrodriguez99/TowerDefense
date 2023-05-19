@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shotgun : Gun
 {
-    [SerializeField] private float _bulletsPerShell = 5;
+    [SerializeField] private int _bulletsPerShell = 5;
     GameObject _bulletHole;
 
 
@@ -24,8 +24,9 @@ public class Shotgun : Gun
                 BulletPrefab,
                 _bulletHole.transform.position + Random.insideUnitSphere * .5f,
                 transform.rotation);
-            EventManager.instance.ActionAmmoChange(CurrentBulletCount, MagSize);
         }
+        _currentBulletCount -= _bulletsPerShell;
+        EventManager.instance.ActionAmmoChange(CurrentBulletCount, MagSize);
     }
 
 }
