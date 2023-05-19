@@ -38,6 +38,13 @@ public class EventManager : MonoBehaviour
     public event Action<int> OnWeaponChange;
     public event Action<int> onRewardEarned;
 
+    public event Action<int> OnGoldChange;
+
+    public void ActionGoldChange(int amount) 
+    {
+        OnGoldChange?.Invoke(amount);
+    }
+
     public void ActionWeaponChange(int weaponIndex) 
     {   
         OnWeaponChange?.Invoke(weaponIndex);

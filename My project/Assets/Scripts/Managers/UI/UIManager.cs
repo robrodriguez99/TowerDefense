@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         EventManager.instance.OnCharacterLifeChange += OnCharacterLifeChange;
         EventManager.instance.OnWeaponChange += OnWeaponChange;
         EventManager.instance.OnAmmoChange += OnAmmoChange;
-        EventManager.instance.onRewardEarned += OnRewardEarned;
+        EventManager.instance.OnGoldChange += OnGoldChange;
        
     }
     private void OnCharacterLifeChange(float currentLife, float maxLife)
@@ -43,8 +43,9 @@ public class UIManager : MonoBehaviour
         _ammoText.text = $"{currentAmmo}" + "/" + $"{maxAmmo}";
     }
 
-    private void OnRewardEarned(int amount)
+    private void OnGoldChange(int amount)
     {
+        Debug.Log("Reward earned at gold change UiManager with amount: " + amount);
         _goldText.text = $"{amount}";
     }
 

@@ -17,6 +17,5 @@ public class TransactionController : MonoBehaviour, ITrader, IRewardable
     {
        _gold += amount;
         Debug.Log("Earned: " + amount + " Remaining: " + _gold);
-
     }
 }
