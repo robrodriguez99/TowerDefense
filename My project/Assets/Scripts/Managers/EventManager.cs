@@ -25,10 +25,6 @@ public class EventManager : MonoBehaviour
     #region GAME_MANAGER
     public event Action<bool> OnGameOver;
 
-    public void EventGameOver(bool isVictory) 
-    {
-        if (OnGameOver != null) OnGameOver(isVictory);
-    }
     #endregion
 
     #region IN_GAME_UI
@@ -37,6 +33,17 @@ public class EventManager : MonoBehaviour
     public event Action<int> onEnemySuccess;
     public event Action<int> OnWeaponChange;
     public event Action<int> onRewardEarned;
+
+    public event Action<int> OnGoldChange;
+    public void ActionGameOver(bool isVictory) 
+    {     
+        OnGameOver?.Invoke(isVictory);
+    }
+
+    public void ActionGoldChange(int amount) 
+    {
+        OnGoldChange?.Invoke(amount);
+    }
 
     public void ActionWeaponChange(int weaponIndex) 
     {   

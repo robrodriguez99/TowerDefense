@@ -20,6 +20,7 @@ public class Character : Actor
     private TransactionController _transactionController;
 
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject NoMoneyMessage;
 
     [SerializeField] private Transform camera;
 
@@ -47,10 +48,14 @@ public class Character : Actor
         _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
+        
+        if (_transactionController == null)
+        {
+            Debug.LogError("TransactionController component not found on " + gameObject.name);
+        }
 
         EventManager.instance.onRewardEarned += OnRewardEarned;
         EventManager.instance.onEnemySuccess += OnEnemySuccess;
-
     }
 
     // Update is called once per frame
@@ -73,7 +78,19 @@ public class Character : Actor
 
         if (Input.GetKeyDown(KeyCode.F2)) GetComponent<LifeController>().TakeDamage(10);
 
+        //TODO: REMOVE THIS
+        if (Input.GetKeyDown(KeyCode.F1)) {
 
+            _transactionController.Buy(10);
+            EventManager.instance.ActionGoldChange(_transactionController.Gold);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.F3)) {
+            //TODO: REMOVE THIS
+            //we set the no more money message
+            EnableNoMoneyMessage();
+        }
 
          // Pause game
         if (Input.GetKeyDown(KeyCode.Escape)) 
@@ -106,6 +123,19 @@ public class Character : Actor
         SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     }
 
+    public void EnableNoMoneyMessage()
+    {
+        //we set it active for 3 seconds
+        NoMoneyMessage.SetActive(true);
+        Invoke("DisableNoMoneyMessage", 3f);
+    
+    }
+
+    public void DisableNoMoneyMessage()
+    {
+        NoMoneyMessage.SetActive(false);
+    }
+
     private void EquipWeapon(Weapon weaponIdx)
     {
         foreach (Gun gun in _availableWeapons)
@@ -122,7 +152,14 @@ public class Character : Actor
         EventManager.instance.ActionAmmoChange(_currentWeapon.CurrentBulletCount, _currentWeapon.MagSize);
     }
 
-    private void OnRewardEarned(int amount) => _transactionController.Earn(amount);
+
+
+    private void OnRewardEarned(int amount)
+    {
+        _transactionController.Earn(amount);
+        EventManager.instance.ActionGoldChange(_transactionController.Gold);
+
+    }
 
     private void OnEnemySuccess(int damage) => _lifeController.TakeDamage(damage);
 
