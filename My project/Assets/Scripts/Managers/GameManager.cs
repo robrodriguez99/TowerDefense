@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
          // Make the mouse cursor visible
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None; 
-        LoadMainMenu();
     }
 
     public void OnPauseRequested()
