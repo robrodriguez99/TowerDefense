@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a7cdaa7e2bc304f976ad260259e41d, type: 3}
-  m_Name: TurretCannonStats
+  m_Script: {fileID: 11500000, guid: 315640abe0cd23542aad964e58ae9343, type: 3}
+  m_Name: PlayerBulletStats
   m_EditorClassIdentifier: 
-  _gunStats:
-    bulletPrefab: {fileID: 4803195870135463313, guid: 9fae4d88cc6450e4286957da9f0835a7, type: 3}
-    Damage: 10
-    MagSize: 10
-    ShotCooldown: 1
+  _statValues:
+    lifetime: 3
+    impactEffect: {fileID: 3057828524516780500, guid: 0e1b5738fa118cb45aada003ee03d4d9, type: 3}
+    movementSpeed: 60

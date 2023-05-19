@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30992003c288eec4aa34efb43021427a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactEffect: {fileID: 3057828524516780500, guid: 0e1b5738fa118cb45aada003ee03d4d9, type: 3}
-  _movementSpeed: 20
+  _bulletStats: {fileID: 11400000, guid: 63ea909a4d3e3e84f980eb4feedde1d1, type: 2}
+  lifetimeController: {fileID: 0}
 --- !u!135 &-8137738061487829076
 SphereCollider:
   m_ObjectHideFlags: 0

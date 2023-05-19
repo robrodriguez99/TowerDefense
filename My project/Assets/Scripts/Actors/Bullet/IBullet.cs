@@ -4,10 +4,12 @@ using UnityEngine;
 
 public interface IBullet 
 {   
+    GameObject ImpactEffect { get; }
+
    float Lifetime { get; }
 
    void Travel();
 
-   void OnCollisionEnter(Collision collision);
+   void OnTriggerEnter(Collider collision);
    
 }

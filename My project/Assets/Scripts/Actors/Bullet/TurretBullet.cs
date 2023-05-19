@@ -1,18 +1,8 @@
 using UnityEngine;
 
-public class TurretBullet : MonoBehaviour, IBullet {
+public class TurretBullet : Bullet {
 
 	private Transform _target;
-
-	public GameObject impactEffect;
-
-    public float Lifetime => throw new System.NotImplementedException();
-
-	public float MovementSpeed => _movementSpeed;
-
-    public float RotationSpeed => throw new System.NotImplementedException();
-
-    [SerializeField] private float _movementSpeed = 100f;
 
     public void Seek (Transform target)
 	{
@@ -27,30 +17,13 @@ public class TurretBullet : MonoBehaviour, IBullet {
 			return;
 		}
 
-        Move(_target.position - transform.position);
+        Travel();
 
     }
 
-	void HitTarget ()
-	{
-		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-		Destroy(effectIns, 2f);
-		Destroy(this.gameObject);
-	}
+    new public void Travel() => Move(_target.position - transform.position);
 
-    public void Travel()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnTriggerEnter(Collider collision)
-    {
-        IDamageable damageable = collision.gameObject.GetComponent<Actor>().lifeController;
-        damageable?.TakeDamage(10);
-		HitTarget();
-    }
-
-    public void Move(Vector3 direction)
+    new public void Move(Vector3 direction)
     {
         direction.Normalize();
 
@@ -59,12 +32,8 @@ public class TurretBullet : MonoBehaviour, IBullet {
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
 
         // Move towards the target
-        transform.Translate(direction * _movementSpeed * Time.deltaTime, Space.World);
+        transform.Translate(direction * MovementSpeed * Time.deltaTime, Space.World);
 
     }
 
-    public void Rotation(Vector3 direction)
-    {
-        throw new System.NotImplementedException();
-    }
 }

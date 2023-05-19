@@ -123,5 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3168dc8013c5d0f4c9790437addf38b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 100
-  _lifetime: 0
+  _bulletStats: {fileID: 11400000, guid: 0cb384d65c293a241a10439bb9ffb1ca, type: 2}
+  lifetimeController: {fileID: 0}
