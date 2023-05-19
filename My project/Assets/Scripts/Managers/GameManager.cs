@@ -34,8 +34,11 @@ public class GameManager : MonoBehaviour
     }
 
     private void LoadEndgameScene() {
-        // Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
+        Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
         EndGameScene.SetActive(true);
+         // Make the mouse cursor visible
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None; 
     }
 
     private void OnWaveCleared()
