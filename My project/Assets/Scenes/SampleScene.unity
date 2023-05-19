@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0055761803, g: 0.0023517245, b: 0.0082511315, a: 1}
+  m_IndirectSpecularColor: {r: 0.0056387577, g: 0.0023531427, b: 0.0083307875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7609,11 +7609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68e5527f896f8a44a6a1881b3fb9de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
-  _damage: 10
-  _magSize: 20
+  _gunStats: {fileID: 0}
+  shootingSound: {fileID: 0}
   _currentBulletCount: 0
-  _shotCooldown: 0.5
 --- !u!1001 &947450781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13720,12 +13718,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10e0fcfe18d3d946a78b253517c5a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actorStats: {fileID: 0}
+  lifeController: {fileID: 0}
   _availableWeapons:
   - {fileID: 939266088}
   - {fileID: 1805014103}
   _currentWeapon: {fileID: 0}
-  _rotationSpeed: 50
-  _movementSpeed: 4
+  pauseMenu: {fileID: 0}
+  NoMoneyMessage: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!136 &1722034278
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14421,11 +14422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec0874291d7ac740a007b4fcc307bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 3579798597661528930, guid: 2ebfbc143b575af48a466a6e1242607d, type: 3}
-  _damage: 10
-  _magSize: 20
+  _gunStats: {fileID: 0}
+  shootingSound: {fileID: 0}
   _currentBulletCount: 0
-  _shotCooldown: 0.5
   _bulletsPerShell: 5
 --- !u!4 &1806211886 stripped
 Transform:
@@ -14526,7 +14525,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4974307145611770, guid: c7bd5c71ab13c41359305dc1af814468, type: 3}
   spawnPoint: {fileID: 2058946382}
-  timeBetweenWaves: 5.5
   waveCountdownText: {fileID: 1302744328}
 --- !u!4 &1824025228
 Transform:
