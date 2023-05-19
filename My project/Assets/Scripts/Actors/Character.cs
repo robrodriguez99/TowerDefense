@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,8 @@ public class Character : Actor
     private CmdAttack _cmdAttack;
     private CmdReload _cmdReload;
 
+    private bool _canBuild = false;
+
     // Start is called before the first frame update
      protected override void Start()
     {
@@ -41,13 +44,8 @@ public class Character : Actor
         _movementController = GetComponent<MovementController>();
         _transactionController = GetComponent<TransactionController>();
         EquipWeapon(Weapon.LaserPistol);
-        Debug.Log("Movement Controller: " + _movementController);
-        _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
-        _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
-        _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
-        _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
-        _cmdAttack = new CmdAttack(_currentWeapon);
-        _cmdReload = new CmdReload(_currentWeapon);
+        InitializeCommands();
+        
         
         if (_transactionController == null)
         {
@@ -61,6 +59,24 @@ public class Character : Actor
     // Update is called once per frame
     void Update()
     {
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Access the object that was hit
+            GameObject objectHit = hit.transform.gameObject;
+
+            // Do something with the object
+            Debug.Log("Object Hit: " + objectHit.name);
+
+            _canBuild = objectHit.tag == "Platform" ? true : false;
+            Debug.Log(_canBuild);
+
+            // Replace this code with the action you want to perform on the object
+        }
 
         //Move fwd and bkw
         if (Input.GetKey(KeyCode.W)) _cmdMoveForward.Execute();
@@ -76,18 +92,16 @@ public class Character : Actor
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
-        //TODO: REMOVE THIS
-        if (Input.GetKeyDown(KeyCode.F1)) {
-
-            _transactionController.Buy(10);
-            EventManager.instance.ActionGoldChange(_transactionController.Gold);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.F3)) {
-            //TODO: REMOVE THIS
-            //we set the no more money message
-            EnableNoMoneyMessage();
+        if(Input.GetKeyDown(KeyCode.O) && _canBuild)
+        {
+            if (_transactionController.Gold < 10)
+                EnableNoMoneyMessage();
+            else
+            {
+                _transactionController.Buy(10);
+                Node node = hit.transform.gameObject.GetComponent<Node>();
+                node?.BuildTurret();
+            }
         }
 
          // Pause game
@@ -155,10 +169,18 @@ public class Character : Actor
     private void OnRewardEarned(int amount)
     {
         _transactionController.Earn(amount);
-        EventManager.instance.ActionGoldChange(_transactionController.Gold);
-
     }
 
     private void OnEnemySuccess(int damage) => lifeController.TakeDamage(damage);
+
+    private void InitializeCommands()
+    {
+        _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
+        _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
+        _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
+        _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
+        _cmdAttack = new CmdAttack(_currentWeapon);
+        _cmdReload = new CmdReload(_currentWeapon);
+    }
 
 }

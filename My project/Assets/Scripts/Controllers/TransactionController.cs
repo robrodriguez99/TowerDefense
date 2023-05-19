@@ -9,13 +9,15 @@ public class TransactionController : MonoBehaviour, ITrader, IRewardable
 
     public void Buy(int amount)
     {
-       _gold -= amount;
+        _gold -= amount;
+        EventManager.instance.ActionGoldChange(_gold);
         Debug.Log("Spent: " + amount + " Remaining: " + _gold);
     }
 
     public void Earn(int amount)
     {
        _gold += amount;
+        EventManager.instance.ActionGoldChange(_gold);
         Debug.Log("Earned: " + amount + " Remaining: " + _gold);
     }
 }

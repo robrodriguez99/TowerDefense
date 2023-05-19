@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TurretBullet : MonoBehaviour, IBullet, IMovable, IRotable {
+public class TurretBullet : MonoBehaviour, IBullet {
 
 	private Transform target;
 

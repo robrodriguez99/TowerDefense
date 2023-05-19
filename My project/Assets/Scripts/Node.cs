@@ -16,17 +16,17 @@ public class Node : MonoBehaviour {
 		startColor = rend.material.color;
     }
 
-	void OnMouseDown ()
-	{
+    public void BuildTurret()
+    {
 		if (turret != null)
 		{
 			Debug.Log("Can't build there! - TODO: Display on screen.");
 			return;
 		}
 
-		GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-		turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-	}
+        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+    }
 
 	void OnMouseEnter ()
 	{
