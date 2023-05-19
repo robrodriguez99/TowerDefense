@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver = false;
     [SerializeField] private bool _isVictory = false;
-    [SerializeField] private Text _gameoverMessage;
+    [SerializeField] private TextMeshProUGUI _gameoverMessage;
+    [SerializeField] public GameObject EndGameScene;
+
 
     private void Start()
     {
         EventManager.instance.OnGameOver += OnGameOver;
+
         _gameoverMessage.text = string.Empty;
     }
 
@@ -20,13 +24,16 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
         _isVictory = isVictory;
-        GlobalVictory.Instance.IsVictory = isVictory;
+        // GlobalVictory.Instance.IsVictory = isVictory;
 
         _gameoverMessage.text = isVictory ? "Victory" : "Defeat";
         _gameoverMessage.color = isVictory ? Color.cyan : Color.red;
 
-        Invoke("LoadEndgameScene", 3f);
+        LoadEndgameScene();
     }
 
-    private void LoadEndgameScene() => SceneManager.LoadScene(UnityScenes.EndGame.ToString());
+    private void LoadEndgameScene() {
+        // Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
+        EndGameScene.SetActive(true);
+    }
 }

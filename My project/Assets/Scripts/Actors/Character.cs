@@ -20,7 +20,7 @@ public class Character : Actor
     private TransactionController _transactionController;
 
     private CharacterController _characterController;
-    [SerializeField] public GameObject pauseMenu;//
+    [SerializeField] public GameObject pauseMenu;
     [SerializeField] public GameObject NoMoneyMessage;
 
     private CmdMovement _cmdMoveForward;

@@ -14,7 +14,6 @@ public class LifeController : MonoBehaviour, IDamageable
     public void RecoverLife(int amount) => _currentLife += amount;
 
     public void TakeDamage(int damage) {
-        Debug.Log("Taking damage");
         _currentLife -= damage;
         if (isMainCharacter)
            ActionUpdateUiLife();
@@ -30,8 +29,15 @@ public class LifeController : MonoBehaviour, IDamageable
     public bool IsAlive() => _currentLife > 0;
 
     public void Die() {
-        if (!isMainCharacter) EventManager.instance.ActionRewardEarned(10);
-        Destroy(this.gameObject);
+        if (!isMainCharacter) {
+            EventManager.instance.ActionRewardEarned(10);
+            Destroy(this.gameObject);
+        }
+
+        if (isMainCharacter) {
+            EventManager.instance.ActionGameOver(false);
+        }
+        
     }
 
     private void ActionUpdateUiLife() {
