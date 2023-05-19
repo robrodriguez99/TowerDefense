@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
+    private float _xSensitivity = 20f;
+    private float _ySensitivity = 20f;
 
-    private float _xSensitivity;
-    private float _ySensitivity;
+    private float xRotation;
+    private float yRotation;
 
-    float xRotation;
-    float yRotation;
-
-    private Transform _orientation;
+    public Transform _orientation;
+    public Transform playerPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +23,12 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * _xSensitivity;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * _ySensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * _xSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * _ySensitivity;
 
         yRotation += mouseX;
+        xRotation -= mouseY; // Modify xRotation with negative mouseY
+
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
