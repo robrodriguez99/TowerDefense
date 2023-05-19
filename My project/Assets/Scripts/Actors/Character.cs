@@ -19,8 +19,9 @@ public class Character : Actor
 
     private TransactionController _transactionController;
 
-    private CharacterController _characterController;
     [SerializeField] public GameObject pauseMenu;
+
+    [SerializeField] private Transform camera;
 
     private CmdMovement _cmdMoveForward;
     private CmdMovement _cmdMoveBackwards;
@@ -35,8 +36,8 @@ public class Character : Actor
      protected override void Start()
     {
         base.Start();
+
         _movementController = GetComponent<MovementController>();
-        _characterController = GetComponent<CharacterController>();
         _transactionController = GetComponent<TransactionController>();
         EquipWeapon(Weapon.LaserPistol);
         Debug.Log("Movement Controller: " + _movementController);
@@ -62,7 +63,6 @@ public class Character : Actor
 
         if (Input.GetKey(KeyCode.A)) _cmdRotateLeft.Execute();
         if (Input.GetKey(KeyCode.D)) _cmdRotateRight.Execute();
-
 
         if (Input.GetAxis("Fire1") > 0) _cmdAttack.Execute();
         if (Input.GetKeyDown(KeyCode.R)) _cmdReload.Execute();
