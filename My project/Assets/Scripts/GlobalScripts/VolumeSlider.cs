@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    private const string VolumeKey = "Volume";
-    private Slider slider;
+    private const string _VolumeKey = "Volume";
+    private Slider _slider;
 
     void Awake()
     {
-        slider = GetComponent<Slider>();
+        _slider = GetComponent<Slider>();
         // Initialize the slider value
-        slider.value = PlayerPrefs.GetFloat(VolumeKey, 0.5f);
+        _slider.value = PlayerPrefs.GetFloat(_VolumeKey, 0.5f);
     }
 
     public void OnValueChanged()
     {
         // Update the volume in PlayerPrefs when the slider value is changed
-        PlayerPrefs.SetFloat(VolumeKey, slider.value);
+        PlayerPrefs.SetFloat(_VolumeKey, _slider.value);
         PlayerPrefs.Save();
         
         // If there's a MusicManager in the scene, also update the volume directly
         if (MusicManager.instance != null)
         {
-            MusicManager.instance.SetVolume(slider.value);
+            MusicManager.instance.SetVolume(_slider.value);
         }
     }
 }

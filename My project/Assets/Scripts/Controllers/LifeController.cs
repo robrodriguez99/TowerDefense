@@ -10,12 +10,12 @@ public class LifeController : MonoBehaviour, IDamageable
     public int MaxLife => GetComponent<Actor>().ActorStats.MaxLife;
     public int CurrentLife => _currentLife;
     [SerializeField] private int _currentLife = 100;
-    [SerializeField] private bool isMainCharacter = false;
+    [SerializeField] private bool _isMainCharacter = false;
     public void RecoverLife(int amount) => _currentLife += amount;
 
     public void TakeDamage(int damage) {
         _currentLife -= damage;
-        if (isMainCharacter)
+        if (_isMainCharacter)
            ActionUpdateUiLife();
         if (!IsAlive()) Die();
      }
@@ -29,12 +29,10 @@ public class LifeController : MonoBehaviour, IDamageable
     public bool IsAlive() => _currentLife > 0;
 
     public void Die() {
-        if (!isMainCharacter) {
+        if (!_isMainCharacter) {
             EventManager.instance.ActionRewardEarned(10);
             Destroy(this.gameObject);
-        }
-
-        if (isMainCharacter) {
+        } else {
             EventManager.instance.ActionGameOver(false);
         }
         

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour, IBullet {
 
-	private Transform target;
+	private Transform _target;
 
 	public GameObject impactEffect;
 
@@ -14,20 +14,20 @@ public class TurretBullet : MonoBehaviour, IBullet {
 
     [SerializeField] private float _movementSpeed = 100f;
 
-    public void Seek (Transform _target)
+    public void Seek (Transform target)
 	{
-		target = _target;
+		_target = target;
 	}
 
 	void Update () {
 
-		if (target == null)
+		if (_target == null)
 		{
 			Destroy(gameObject);
 			return;
 		}
 
-        Move(target.position - transform.position);
+        Move(_target.position - transform.position);
 
     }
 

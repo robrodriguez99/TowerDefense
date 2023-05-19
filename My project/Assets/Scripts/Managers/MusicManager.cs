@@ -5,8 +5,8 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager instance = null;
-    private AudioSource audioSource;
-    private const string VolumeKey = "Volume";
+    private AudioSource _audioSource;
+    private const string _volumeKey = "Volume";
 
     void Awake()
     {
@@ -22,24 +22,24 @@ public class MusicManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
 
         // Retrieve volume from PlayerPrefs or set a default value
-        float volume = PlayerPrefs.GetFloat(VolumeKey, 0.5f);
+        float volume = PlayerPrefs.GetFloat(_volumeKey, 0.5f);
 
-        if (audioSource != null)
+        if (_audioSource != null)
         {
-            audioSource.volume = volume;
+            _audioSource.volume = volume;
         }
     }
 
     public void SetVolume(float vol)
     {
         // Set and save the volume
-        if (audioSource != null)
+        if (_audioSource != null)
         {
-            audioSource.volume = vol;
-            PlayerPrefs.SetFloat(VolumeKey, vol);
+            _audioSource.volume = vol;
+            PlayerPrefs.SetFloat(_volumeKey, vol);
             PlayerPrefs.Save();
         }
     }

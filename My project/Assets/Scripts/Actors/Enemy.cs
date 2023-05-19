@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class Enemy : Actor
 {  
-    private Transform target;
-    private int wavepointIndex = 0;
+    private Transform _target;
+    private int _wavepointIndex = 0;
     private int _damage = 10;
 
     protected override void Start()
     {   
         base.Start();
-        target = Waypoints.points[0];
+        _target = Waypoints.points[0];
     }
 
     void Update()
     {
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         transform.Translate(dir.normalized * _actorStats.MovementSpeed * Time.deltaTime, Space.World);
-        transform.LookAt(target);
+        transform.LookAt(_target);
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+        if (Vector3.Distance(transform.position, _target.position) <= 0.4f)
         {
             GetNextWaypoint();
         }
@@ -27,14 +27,14 @@ public class Enemy : Actor
 
     void GetNextWaypoint()
     {
-        if (wavepointIndex >= Waypoints.points.Length - 1)
+        if (_wavepointIndex >= Waypoints.points.Length - 1)
         {
             Destroy(gameObject);
             return;
         }
 
-        wavepointIndex++;
-        target = Waypoints.points[wavepointIndex];
+        _wavepointIndex++;
+        _target = Waypoints.points[_wavepointIndex];
     }
 
     private void OnCollisionEnter(Collision collision)
