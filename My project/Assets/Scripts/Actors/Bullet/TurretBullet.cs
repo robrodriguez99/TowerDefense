@@ -43,10 +43,10 @@ public class TurretBullet : MonoBehaviour, IBullet {
         throw new System.NotImplementedException();
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<Actor>().lifeController;
-        damageable?.TakeDamage(30);
+        damageable?.TakeDamage(10);
 		HitTarget();
     }
 

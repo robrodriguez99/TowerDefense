@@ -35,11 +35,11 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
         transform.Translate(direction * _movementSpeed * Time.deltaTime);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         //Have to check if is alive to avoid multiple calls to Die() 
-        if (damageable != null && damageable.IsAlive()) new CmdApplyDamage(damageable, 10).Execute();
-        Destroy(this.gameObject);
+         if (damageable != null && damageable.IsAlive()) new CmdApplyDamage(damageable, 10).Execute();
+         Destroy(this.gameObject);
     }
 }
