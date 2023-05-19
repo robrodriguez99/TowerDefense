@@ -25,15 +25,22 @@ public class Character : Actor
 
     [SerializeField] private Transform camera;
 
+    // Movement Commands 
     private CmdMovement _cmdMoveForward;
     private CmdMovement _cmdMoveBackwards;
+    private CmdMovement _cmdMoveLeft;
+    private CmdMovement _cmdMoveRight;
+    // Rotation Commands
     private CmdRotation _cmdRotateLeft;
     private CmdRotation _cmdRotateRight;
 
-
+    //Weapons commands
     private CmdAttack _cmdAttack;
     private CmdReload _cmdReload;
 
+    // Building checks
+    RaycastHit hit;
+    Ray ray;
     private bool _isBuildableSpot = false;
 
     // Start is called before the first frame update
@@ -60,28 +67,24 @@ public class Character : Actor
     void Update()
     {
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        CheckSuitableSpotForBuilding(ray);
 
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Access the object that was hit
-            GameObject objectHit = hit.transform.gameObject;
-            _isBuildableSpot = objectHit.tag == "Platform" ? true : false;
-        }
-
-        //Move fwd and bkw
+        //Movement
         if (Input.GetKey(KeyCode.W)) _cmdMoveForward.Execute();
         if (Input.GetKey(KeyCode.S)) _cmdMoveBackwards.Execute();
 
-        if (Input.GetKey(KeyCode.A)) _cmdRotateLeft.Execute();
-        if (Input.GetKey(KeyCode.D)) _cmdRotateRight.Execute();
+        if (Input.GetKey(KeyCode.A)) _cmdMoveLeft.Execute();
+        if (Input.GetKey(KeyCode.D)) _cmdMoveRight.Execute();
 
+        if (Input.GetKey(KeyCode.LeftArrow)) _cmdRotateLeft.Execute();
+        if (Input.GetKey(KeyCode.RightArrow)) _cmdRotateRight.Execute();
+
+
+        // Weapons
         if (Input.GetAxis("Fire1") > 0) _cmdAttack.Execute();
         if (Input.GetKeyDown(KeyCode.R)) _cmdReload.Execute();
-
-        //Equipar arma
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
@@ -150,11 +153,24 @@ public class Character : Actor
     private void InitializeCommands()
     {
         _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
-        _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
+        _cmdMoveBackwards = new CmdMovement(_movementController, -Vector3.forward);
+        _cmdMoveLeft = new CmdMovement(_movementController, -Vector3.right);
+        _cmdMoveRight = new CmdMovement(_movementController, Vector3.right);
         _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
         _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
+    }
+
+    private void CheckSuitableSpotForBuilding(Ray ray)
+    {
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Access the object that was hit
+            GameObject objectHit = hit.transform.gameObject;
+            _isBuildableSpot = objectHit.tag == "Platform" ? true : false;
+        }
     }
 
 }
