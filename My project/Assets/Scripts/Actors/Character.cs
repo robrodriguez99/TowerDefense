@@ -105,38 +105,13 @@ public class Character : Actor
         {
             if (Time.timeScale == 1)
             {
-                PauseGame();
+                EventManager.instance.ActionPauseRequested();
             }
             else if (Time.timeScale == 0)
             {
-                ResumeGame();
+                EventManager.instance.ActionResumeRequested();
             }
         }
-    }
-
-    public void PauseGame()
-    {
-        Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
-        pauseMenu.SetActive(true);
-
-        // Make the mouse cursor visible
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None; // this line will unlock the cursor if it was locked.
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1; // This makes the game run at normal speed again
-        pauseMenu.SetActive(false);
-
-        // Hide the mouse cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; // this line will lock the cursor again when the game is unpaused.
-    }
-    public void LoadMainMenu()
-    {
-        Time.timeScale = 1; // Ensure that the game is unpaused when you go back to the Main Menu
-        SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     }
 
     public void EnableNoMoneyMessage()

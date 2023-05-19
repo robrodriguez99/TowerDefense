@@ -9,10 +9,19 @@ public class WaveSpawner : MonoBehaviour
     public Transform enemyPrefab;
     public Transform spawnPoint;
 
+    public static WaveSpawner Instance;
+
     public TextMeshProUGUI  waveCountdownText;
 
     private int _waveIndex = 0;
 
+    void Awake() {
+        if (Instance != null) {
+            Destroy(gameObject);
+        }
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Update ()
     {
@@ -42,7 +51,13 @@ public class WaveSpawner : MonoBehaviour
 
     Transform SpawnEnemy ()
     {
-       return Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        if (spawnPoint == null)
+        {
+            Debug.LogError("SpawnPoint is null in WaveSpawner");
+            return null;
+        }
+
+        return Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
 }
