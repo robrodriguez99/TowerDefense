@@ -8,10 +8,17 @@ public class EventManager : MonoBehaviour
     static public EventManager instance;
 
     #region UNITY_EVENTS
-    private void Awake()
+     private void Awake()
     {
-        if (instance != null) Destroy(this);
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
@@ -27,35 +34,37 @@ public class EventManager : MonoBehaviour
     #region IN_GAME_UI
     public event Action<int, int> OnAmmoChange;
     public event Action<float, float> OnCharacterLifeChange;
-    public void ActionCharacterLifeChange(float currentLife, float maxLife) => OnCharacterLifeChange(currentLife, maxLife);
-    
-    public event Action<int> onRewardEarned;
-    public void ActionRewardEarned(int amount) => onRewardEarned(amount);
-
     public event Action<int> onEnemySuccess;
-    public void ActionEnemySuccess(int damage) => onEnemySuccess(damage);
-
     public event Action<int> OnWeaponChange;
-    // public event Action OnAvatarChange;
+    public event Action<int> onRewardEarned;
 
-    public void AmmoChange(int currentAmmo, int maxAmmo)
+    public void ActionWeaponChange(int weaponIndex) 
+    {   
+        OnWeaponChange?.Invoke(weaponIndex);
+    }   
+    public void ActionAmmoChange(int currentAmmo, int maxAmmo) 
     {
-        if (OnAmmoChange != null) OnAmmoChange(currentAmmo, maxAmmo);
+        OnAmmoChange?.Invoke(currentAmmo, maxAmmo);
     }
 
-    // public void ActionCharacterLifeChange(float currentLife, float maxLife)
-    // {
-    //     if (OnCharacterLifeChange != null) OnCharacterLifeChange(currentLife, maxLife);
-    // }
-
-    public void WeaponChange(int weaponIndex)
+    public void ActionCharacterLifeChange(float currentLife, float maxLife) 
     {
-        if (OnWeaponChange != null) OnWeaponChange(weaponIndex);
+        OnCharacterLifeChange?.Invoke(currentLife, maxLife);
     }
 
-    // public void AvatarChange()
-    // {
-    //     if (OnAvatarChange != null) OnAvatarChange();
-    // }
+    public void ActionEnemySuccess(int damage) 
+    {
+        onEnemySuccess?.Invoke(damage);
+    }
+
+    public void ActionRewardEarned(int amount) 
+    {
+        onRewardEarned?.Invoke(amount);
+    }
+
+    
+
+
+
     #endregion
 }

@@ -6,17 +6,16 @@ using UnityEngine;
 public class MovementController : MonoBehaviour, IMovable, IRotable
 {
     private CharacterController _characterController;
-
-    public float MovementSpeed => GetComponent<Actor>().ActorStats.MovementSpeed;
-
-    public float RotationSpeed => GetComponent<Actor>().ActorStats.RotationSpeed;
-
+    private ActorStats _actorStats;
+    public float MovementSpeed => _actorStats.MovementSpeed;
+    public float RotationSpeed => _actorStats.RotationSpeed;
     private float _verticalSpeed = 0f; // This will store the current vertical speed due to gravity
     private float _gravity = -9.81f; // You can adjust this to whatever feels right
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _actorStats = GetComponent<Actor>().ActorStats;
     }
 
     public void Move(Vector3 direction)
