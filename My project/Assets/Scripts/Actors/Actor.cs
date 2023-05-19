@@ -5,12 +5,12 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     public ActorStats ActorStats => _actorStats;
-    [SerializeField] private ActorStats _actorStats;
+    [SerializeField] protected ActorStats _actorStats;
 
-    public LifeController _lifeController;
+    public LifeController lifeController;
 
     protected virtual void Start()
     {
-        _lifeController = GetComponent<LifeController>();
+        lifeController = GetComponent<LifeController>();
     }
 }

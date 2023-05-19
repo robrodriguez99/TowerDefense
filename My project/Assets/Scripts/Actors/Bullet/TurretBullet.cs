@@ -45,7 +45,7 @@ public class TurretBullet : MonoBehaviour, IBullet, IMovable, IRotable {
 
     public void OnCollisionEnter(Collision collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<Actor>()._lifeController;
+        IDamageable damageable = collision.gameObject.GetComponent<Actor>().lifeController;
         damageable?.TakeDamage(30);
 		HitTarget();
     }

@@ -76,8 +76,6 @@ public class Character : Actor
         if (Input.GetKeyDown(KeyCode.Alpha1)) EquipWeapon(Weapon.LaserPistol);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EquipWeapon(Weapon.Shotgun);
 
-        if (Input.GetKeyDown(KeyCode.F2)) GetComponent<LifeController>().TakeDamage(10);
-
         //TODO: REMOVE THIS
         if (Input.GetKeyDown(KeyCode.F1)) {
 
@@ -161,6 +159,6 @@ public class Character : Actor
 
     }
 
-    private void OnEnemySuccess(int damage) => _lifeController.TakeDamage(damage);
+    private void OnEnemySuccess(int damage) => lifeController.TakeDamage(damage);
 
 }

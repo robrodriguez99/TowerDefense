@@ -10,7 +10,7 @@ public class PlayerBullet : MonoBehaviour, IBullet, IMovable
     public float MovementSpeed => _movementSpeed;
     [SerializeField] private float _movementSpeed = 100f;
 
-    public float Lifetime => _lifetime = 10f;
+    public float Lifetime => _lifetime = 3f;
 
     [SerializeField] private float _lifetime;
 

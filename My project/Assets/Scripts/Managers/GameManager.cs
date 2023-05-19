@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver = false;
     [SerializeField] private bool _isVictory = false;
+    [SerializeField] private int  _wavesCleared = 0;
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         EventManager.instance.OnGameOver += OnGameOver;
-
+        EventManager.instance.OnWaveCleared += OnWaveCleared;
         _gameoverMessage.text = string.Empty;
     }
 
@@ -35,5 +36,11 @@ public class GameManager : MonoBehaviour
     private void LoadEndgameScene() {
         // Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
         EndGameScene.SetActive(true);
+    }
+
+    private void OnWaveCleared()
+    {
+        _wavesCleared++;
+        if (_wavesCleared == 4) OnGameOver(true);
     }
 }

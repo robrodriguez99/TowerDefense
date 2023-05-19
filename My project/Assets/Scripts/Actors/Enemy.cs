@@ -2,9 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Actor
-{
-  public float speed = 10f;
-  
+{  
     private Transform target;
     private int wavepointIndex = 0;
     private int _damage = 10;
@@ -18,7 +16,7 @@ public class Enemy : Actor
     void Update()
     {
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(dir.normalized * _actorStats.MovementSpeed * Time.deltaTime, Space.World);
         transform.LookAt(target);
 
         if (Vector3.Distance(transform.position, target.position) <= 0.4f)
@@ -41,11 +39,20 @@ public class Enemy : Actor
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Finish")
+        GameObject objectCollided = collision.gameObject;
+        if(objectCollided.tag == "Finish")
         {
-            Debug.Log("AAAAAAAAAAAAAAA");
             EventManager.instance.ActionEnemySuccess(_damage);
             Destroy(this.gameObject);
+        }
+
+        if(objectCollided.tag == "Player")
+        {
+            IDamageable damageable = objectCollided.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                new CmdApplyDamage(damageable, 10).Execute();
+            }
         }
     }
 

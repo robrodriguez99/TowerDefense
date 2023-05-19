@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
     static public EventManager instance;
 
     #region UNITY_EVENTS
-     private void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -33,8 +33,16 @@ public class EventManager : MonoBehaviour
     public event Action<int> onEnemySuccess;
     public event Action<int> OnWeaponChange;
     public event Action<int> onRewardEarned;
-
+    public event Action OnWaveCleared;
     public event Action<int> OnGoldChange;
+
+
+
+    public void ActionWaveCleared()
+    {
+        OnWaveCleared.Invoke();
+    }
+
     public void ActionGameOver(bool isVictory) 
     {     
         OnGameOver?.Invoke(isVictory);

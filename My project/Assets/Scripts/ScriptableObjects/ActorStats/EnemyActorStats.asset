@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyActorStats
   m_EditorClassIdentifier: 
   _statValues:
-    MaxLife: 100
-    MovementSpeed: 30
+    MaxLife: 80
+    MovementSpeed: 5
     RotationSpeed: 20
