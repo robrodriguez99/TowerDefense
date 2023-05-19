@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int  _wavesCleared = 0;
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
-
+    [SerializeField] public GameObject pauseMenu;
 
     private void Start()
     {
         EventManager.instance.OnGameOver += OnGameOver;
         EventManager.instance.OnWaveCleared += OnWaveCleared;
+        EventManager.instance.OnPauseRequested += OnPauseRequested;
+        EventManager.instance.OnResumeRequested += OnResumeRequested;
         _gameoverMessage.text = string.Empty;
     }
 
@@ -39,6 +41,34 @@ public class GameManager : MonoBehaviour
          // Make the mouse cursor visible
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None; 
+        LoadMainMenu();
+    }
+
+    public void OnPauseRequested()
+    {
+        Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
+        pauseMenu.SetActive(true);
+
+        // Make the mouse cursor visible
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None; // this line will unlock the cursor if it was locked.
+    }
+
+    public void OnResumeRequested()
+    {
+        Time.timeScale = 1; // This makes the game run at normal speed again
+        pauseMenu.SetActive(false);
+
+        // Hide the mouse cursor
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; // this line will lock the cursor again when the game is unpaused.
+    }
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1; 
+        // Stop all Coroutines before loading the new scene.
+        StopAllCoroutines();
+        SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     }
 
     private void OnWaveCleared()
@@ -46,4 +76,6 @@ public class GameManager : MonoBehaviour
         _wavesCleared++;
         if (_wavesCleared == 4) OnGameOver(true);
     }
+
+    public void ActionExit() => Application.Quit();
 }

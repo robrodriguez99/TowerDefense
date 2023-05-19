@@ -35,12 +35,28 @@ public class EventManager : MonoBehaviour
     public event Action<int> onRewardEarned;
     public event Action OnWaveCleared;
     public event Action<int> OnGoldChange;
+    public event Action OnPauseRequested;
+
+    public event Action OnResumeRequested;
+
+    #endregion
 
 
+    #region ACTIONS
+
+    public void ActionResumeRequested()
+    {
+        OnResumeRequested?.Invoke();
+    }
+
+    public void ActionPauseRequested()
+    {
+        OnPauseRequested?.Invoke();
+    }
 
     public void ActionWaveCleared()
     {
-        OnWaveCleared.Invoke();
+        OnWaveCleared?.Invoke();
     }
 
     public void ActionGameOver(bool isVictory) 
@@ -76,10 +92,6 @@ public class EventManager : MonoBehaviour
     {
         onRewardEarned?.Invoke(amount);
     }
-
-    
-
-
 
     #endregion
 }
