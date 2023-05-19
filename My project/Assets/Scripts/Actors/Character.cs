@@ -35,10 +35,11 @@ public class Character : Actor
      protected override void Start()
     {
         base.Start();
-        EquipWeapon(Weapon.LaserPistol);
         _movementController = GetComponent<MovementController>();
         _characterController = GetComponent<CharacterController>();
         _transactionController = GetComponent<TransactionController>();
+        EquipWeapon(Weapon.LaserPistol);
+        Debug.Log("Movement Controller: " + _movementController);
         _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
         _cmdMoveBackwards = new CmdMovement(_movementController, Vector3.back);
         _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
@@ -57,7 +58,7 @@ public class Character : Actor
 
         //Move fwd and bkw
         if (Input.GetKey(KeyCode.W)) _cmdMoveForward.Execute();
-        if(Input.GetKey(KeyCode.S)) _cmdMoveBackwards.Execute();
+        if (Input.GetKey(KeyCode.S)) _cmdMoveBackwards.Execute();
 
         if (Input.GetKey(KeyCode.A)) _cmdRotateLeft.Execute();
         if (Input.GetKey(KeyCode.D)) _cmdRotateRight.Execute();
@@ -118,7 +119,7 @@ public class Character : Actor
         _cmdReload = new CmdReload(_currentWeapon);
 
         EventManager.instance.ActionWeaponChange((int) weaponIdx);
-
+        EventManager.instance.ActionAmmoChange(_currentWeapon.CurrentBulletCount, _currentWeapon.MagSize);
     }
 
     private void OnRewardEarned(int amount) => _transactionController.Earn(amount);

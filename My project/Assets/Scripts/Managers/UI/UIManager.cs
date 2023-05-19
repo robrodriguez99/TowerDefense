@@ -11,8 +11,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _healthBar;
     [SerializeField] private Image _weapon;
     [SerializeField] private TextMeshProUGUI _ammoText;
-
     [SerializeField] private List<Sprite> _weaponSprites;
+
+    [SerializeField] private TextMeshProUGUI _goldText;
 
     // [SerializeField] private Text _scoreText;
 
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
         EventManager.instance.OnCharacterLifeChange += OnCharacterLifeChange;
         EventManager.instance.OnWeaponChange += OnWeaponChange;
         EventManager.instance.OnAmmoChange += OnAmmoChange;
+        EventManager.instance.onRewardEarned += OnRewardEarned;
        
     }
     private void OnCharacterLifeChange(float currentLife, float maxLife)
@@ -39,6 +41,11 @@ public class UIManager : MonoBehaviour
     private void OnAmmoChange(int currentAmmo, int maxAmmo)
     {
         _ammoText.text = $"{currentAmmo}" + "/" + $"{maxAmmo}";
+    }
+
+    private void OnRewardEarned(int amount)
+    {
+        _goldText.text = $"{amount}";
     }
 
 

@@ -8,10 +8,17 @@ public class EventManager : MonoBehaviour
     static public EventManager instance;
 
     #region UNITY_EVENTS
-    private void Awake()
+     private void Awake()
     {
-        if (instance != null) Destroy(this);
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
@@ -27,18 +34,36 @@ public class EventManager : MonoBehaviour
     #region IN_GAME_UI
     public event Action<int, int> OnAmmoChange;
     public event Action<float, float> OnCharacterLifeChange;
-    public event Action<int> onRewardEarned;
     public event Action<int> onEnemySuccess;
     public event Action<int> OnWeaponChange;
+    public event Action<int> onRewardEarned;
 
-    public void ActionWeaponChange(int weaponIndex) => OnWeaponChange(weaponIndex);
+    public void ActionWeaponChange(int weaponIndex) 
+    {   
+        OnWeaponChange?.Invoke(weaponIndex);
+    }   
+    public void ActionAmmoChange(int currentAmmo, int maxAmmo) 
+    {
+        OnAmmoChange?.Invoke(currentAmmo, maxAmmo);
+    }
 
-    public void ActionAmmoChange(int currentAmmo, int maxAmmo) => OnAmmoChange(currentAmmo, maxAmmo);
-    public void ActionCharacterLifeChange(float currentLife, float maxLife) => OnCharacterLifeChange(currentLife, maxLife);
+    public void ActionCharacterLifeChange(float currentLife, float maxLife) 
+    {
+        OnCharacterLifeChange?.Invoke(currentLife, maxLife);
+    }
+
+    public void ActionEnemySuccess(int damage) 
+    {
+        onEnemySuccess?.Invoke(damage);
+    }
+
+    public void ActionRewardEarned(int amount) 
+    {
+        onRewardEarned?.Invoke(amount);
+    }
+
     
-    public void ActionRewardEarned(int amount) => onRewardEarned(amount);
 
-    public void ActionEnemySuccess(int damage) => onEnemySuccess(damage);
 
 
     #endregion

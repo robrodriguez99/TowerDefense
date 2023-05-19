@@ -17,7 +17,7 @@ public class LifeController : MonoBehaviour, IDamageable
         Debug.Log("Taking damage");
         _currentLife -= damage;
         if (isMainCharacter)
-            EventManager.instance.ActionCharacterLifeChange(_currentLife, MaxLife);
+           ActionUpdateUiLife();
         if (!IsAlive()) Die();
      }
 
@@ -32,5 +32,9 @@ public class LifeController : MonoBehaviour, IDamageable
     public void Die() {
         if (!isMainCharacter) EventManager.instance.ActionRewardEarned(10);
         Destroy(this.gameObject);
+    }
+
+    private void ActionUpdateUiLife() {
+        EventManager.instance.ActionCharacterLifeChange(_currentLife, MaxLife);
     }
 }
