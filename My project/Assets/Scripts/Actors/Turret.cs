@@ -66,8 +66,11 @@ public class Turret : Gun, IRotable {
 		TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
         currentShotCooldown = ShotCooldown;
 
-        if (bullet != null)
+		if (bullet != null)
+		{
+			bullet.WeaponDamage = Damage;
 			bullet.Seek(_target);
+		}
 	}
 
 	void OnDrawGizmosSelected ()

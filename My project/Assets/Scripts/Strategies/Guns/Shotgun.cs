@@ -20,10 +20,11 @@ public class Shotgun : Gun
         currentShotCooldown = ShotCooldown;
         for (int i = 0; i < _bulletsPerShell; i++)
         {
-            Instantiate(
+           GameObject bullet =  Instantiate(
                 BulletPrefab,
                 _bulletHole.transform.position + Random.insideUnitSphere * .5f,
                 transform.rotation);
+            bullet.GetComponent<Bullet>().WeaponDamage = Damage;
         }
         _currentBulletCount -= _bulletsPerShell;
         EventManager.instance.ActionAmmoChange(CurrentBulletCount, MagSize);

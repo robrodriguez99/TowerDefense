@@ -57,7 +57,8 @@ public class Gun : MonoBehaviour, IGun
     protected virtual void Shoot()
     {
         GameObject gunBulletHole = GameObject.Find("Gun_Bullet_Hole");
-        Instantiate(BulletPrefab, gunBulletHole.transform.position, transform.rotation);
+        GameObject bullet = Instantiate(BulletPrefab, gunBulletHole.transform.position, transform.rotation);
+        bullet.GetComponent<Bullet>().WeaponDamage = Damage;
         currentShotCooldown = ShotCooldown;
         _currentBulletCount--;
 

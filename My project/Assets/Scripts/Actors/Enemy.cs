@@ -39,8 +39,29 @@ public class Enemy : Actor
 
     private void OnCollisionEnter(Collision collision)
     {
+
         GameObject objectCollided = collision.gameObject;
         if(objectCollided.tag == "Finish")
+        {
+            EventManager.instance.ActionEnemySuccess(_damage);
+            Destroy(this.gameObject);
+        }
+
+        if (objectCollided.tag == "Player")
+        {
+            IDamageable damageable = objectCollided.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                new CmdApplyDamage(damageable, 10).Execute();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+
+        GameObject objectCollided = collision.gameObject;
+        if (objectCollided.tag == "Finish")
         {
             EventManager.instance.ActionEnemySuccess(_damage);
             Destroy(this.gameObject);

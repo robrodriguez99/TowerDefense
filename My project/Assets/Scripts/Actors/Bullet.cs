@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(LifetimeController))]
 public class Bullet : MonoBehaviour, IBullet, IMovable
 {
     public BulletStats BulletStats => _bulletStats;
+
+    public int WeaponDamage { get; set; }
 
     public float Lifetime => _bulletStats.Lifetime;
 
@@ -14,7 +18,7 @@ public class Bullet : MonoBehaviour, IBullet, IMovable
 
     [SerializeField] protected BulletStats _bulletStats;
 
-    public LifetimeController lifetimeController;
+    protected LifetimeController lifetimeController;
 
     protected virtual void Start()
     {
@@ -35,7 +39,7 @@ public class Bullet : MonoBehaviour, IBullet, IMovable
         HitTarget();
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         //Have to check if is alive to avoid multiple calls to Die() 
-        if (damageable != null && damageable.IsAlive()) new CmdApplyDamage(damageable, 10).Execute();
+        if (damageable != null && damageable.IsAlive()) new CmdApplyDamage(damageable, WeaponDamage).Execute();
         Destroy(this.gameObject);
     }
 
