@@ -11,7 +11,6 @@ public class Gun : MonoBehaviour, IGun
     public AudioClip shootingSound;  
     protected AudioSource audioSource; 
 
-
     public int Damage => _gunStats.Damage;
 
     public int MagSize => _gunStats.MagSize;
@@ -25,13 +24,6 @@ public class Gun : MonoBehaviour, IGun
 
     protected virtual void Start()
     {
-        Debug.Log("AASA");
-        Debug.Log(transform.name);
-        Debug.Log(_gunStats.Damage);
-        Debug.Log(_gunStats.MagSize);
-        Debug.Log("END");
-
-
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)  // Add an AudioSource if there isn't one already
         {
@@ -39,7 +31,6 @@ public class Gun : MonoBehaviour, IGun
         }
         _currentBulletCount = MagSize;
     }
-
 
     public virtual void Attack()
     {

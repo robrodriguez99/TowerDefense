@@ -1,7 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(IceTurret))]
-
 public class BuildManager : MonoBehaviour {
 
 	public static BuildManager instance;
