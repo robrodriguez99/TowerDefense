@@ -6,11 +6,14 @@ public class Enemy : Actor
     private Transform _target;
     private int _wavepointIndex = 0;
     private int _damage = 10;
+    Transform[] path;
+
 
     protected override void Start()
     {   
         base.Start();
-        _target = Waypoints.points[0];
+        path = Random.Range(0f, 1f) > 0.5f ? Waypoints.mainPathPoints : Waypoints.altPathPoints;
+        _target = path[0];
     }
 
     void Update()
@@ -27,14 +30,14 @@ public class Enemy : Actor
 
     void GetNextWaypoint()
     {
-        if (_wavepointIndex >= Waypoints.points.Length - 1)
+        if (_wavepointIndex >= path.Length - 1)
         {
             Destroy(gameObject);
             return;
         }
 
         _wavepointIndex++;
-        _target = Waypoints.points[_wavepointIndex];
+        _target = path[_wavepointIndex];
     }
 
     private void OnCollisionEnter(Collision collision)

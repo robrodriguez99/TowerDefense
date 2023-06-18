@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CmdRotation : ICommand
@@ -15,6 +13,11 @@ public class CmdRotation : ICommand
 
     public void Execute()
     {
-        _rotable.Rotation(_direction);
+        _rotable.Rotation(_direction );
+    }
+
+    public void Execute(float x)
+    {
+        _rotable.Rotation(_direction * x);
     }
 }

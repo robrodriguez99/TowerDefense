@@ -1,15 +1,26 @@
+using System;
 using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] points;
+    public static Transform[] mainPathPoints;
+    public static Transform[] altPathPoints;
 
     void Awake()
     {
-        points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++)
+        Debug.Log(transform.GetChild(0));
+        Transform mainPath = transform.GetChild(0);
+        mainPathPoints = new Transform[mainPath.childCount];
+        for (int i = 0; i < mainPathPoints.Length; i++)
         {
-            points[i] = transform.GetChild(i);
+            mainPathPoints[i] = mainPath.GetChild(i);
+        }
+
+        Transform altPath = transform.GetChild(1);
+        altPathPoints = new Transform[altPath.childCount];
+        for (int i = 0; i < altPathPoints.Length; i++)
+        {
+            altPathPoints[i] = altPath.GetChild(i);
         }
     }
 }

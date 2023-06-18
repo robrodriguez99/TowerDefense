@@ -31,16 +31,32 @@ public class MovementController : MonoBehaviour, IMovable, IRotable
         }
 
         Vector3 verticalMove = new Vector3(0, _verticalSpeed, 0);
-        Vector3 horizontalMove = direction.z * MovementSpeed * Time.deltaTime * transform.forward +
-                                 direction.x * MovementSpeed * Time.deltaTime * transform.right;
+        Vector3 horizontalMove = direction.z * MovementSpeed * Time.smoothDeltaTime * transform.forward +
+                                 direction.x * MovementSpeed * Time.smoothDeltaTime * transform.right;
 
         // Move takes into account both horizontal and vertical movement
         _characterController.Move(horizontalMove + verticalMove);
     }
 
 
+    public float minVerticalAngle = -90f;  // Minimum vertical angle
+    public float maxVerticalAngle = 90f;   // Maximum vertical angle
+
     public void Rotation(Vector3 direction)
     {
-        transform.Rotate(direction * RotationSpeed * Time.deltaTime);
+        // Calculate the desired rotation based on the direction and rotation speed
+        Quaternion desiredRotation = Quaternion.Euler(direction * RotationSpeed * Time.deltaTime);
+
+        // Apply the desired rotation to the transform
+        transform.rotation *= desiredRotation;
+
+        // Get the current rotation in Euler angles
+        Vector3 currentEulerAngles = transform.rotation.eulerAngles;
+
+        // Clamp the vertical angle to the desired range
+        float clampedVerticalAngle = Mathf.Clamp(currentEulerAngles.x, minVerticalAngle, maxVerticalAngle);
+
+        // Apply the clamped vertical angle to the rotation
+        transform.rotation = Quaternion.Euler(clampedVerticalAngle, currentEulerAngles.y, currentEulerAngles.z);
     }
 }

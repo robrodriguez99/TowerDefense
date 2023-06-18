@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     private void OnWaveCleared()
     {
         _wavesCleared++;
-        if (_wavesCleared == 4) OnGameOver(true);
+        if (_wavesCleared == 5) OnGameOver(true);
     }
 
     public void ActionExit() => Application.Quit();

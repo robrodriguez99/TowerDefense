@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,8 +32,9 @@ public class Character : Actor
     private CmdMovement _cmdMoveLeft;
     private CmdMovement _cmdMoveRight;
     // Rotation Commands
-    private CmdRotation _cmdRotateLeft;
-    private CmdRotation _cmdRotateRight;
+    private CmdRotation _cmdRotateHorizontal;
+    private CmdRotation _cmdRotateVertical;
+
 
     //Weapons commands
     private CmdAttack _cmdAttack;
@@ -77,9 +79,16 @@ public class Character : Actor
 
         if (Input.GetKey(KeyCode.A)) _cmdMoveLeft.Execute();
         if (Input.GetKey(KeyCode.D)) _cmdMoveRight.Execute();
+        if (Math.Abs(Input.GetAxis("Mouse X")) > 0)
+        {
+           _cmdRotateHorizontal.Execute(Input.GetAxis("Mouse X"));
+        }
 
-        if (Input.GetKey(KeyCode.LeftArrow)) _cmdRotateLeft.Execute();
-        if (Input.GetKey(KeyCode.RightArrow)) _cmdRotateRight.Execute();
+        if (Input.GetKey(KeyCode.D)) _cmdMoveRight.Execute();
+     //   if (Math.Abs(Input.GetAxis("Mouse Y")) > 0)
+       // {
+         //  _cmdRotateVertical.Execute(Input.GetAxis("Mouse Y"));
+        //}
 
 
         // Weapons
@@ -94,9 +103,9 @@ public class Character : Actor
                 EnableNoMoneyMessage();
             else
             {
-                _transactionController.Buy(10);
+
                 Node node = hit.transform.gameObject.GetComponent<Node>();
-                node?.BuildTurret();
+                if (node?.BuildTurret() == true) _transactionController.Buy(10);
             }
         }
 
@@ -156,8 +165,8 @@ public class Character : Actor
         _cmdMoveBackwards = new CmdMovement(_movementController, -Vector3.forward);
         _cmdMoveLeft = new CmdMovement(_movementController, -Vector3.right);
         _cmdMoveRight = new CmdMovement(_movementController, Vector3.right);
-        _cmdRotateLeft = new CmdRotation(_movementController, -Vector3.up);
-        _cmdRotateRight = new CmdRotation(_movementController, Vector3.up);
+        _cmdRotateHorizontal = new CmdRotation(_movementController,Vector3.up);
+        _cmdRotateVertical = new CmdRotation(_movementController, Vector3.right);
         _cmdAttack = new CmdAttack(_currentWeapon);
         _cmdReload = new CmdReload(_currentWeapon);
     }
