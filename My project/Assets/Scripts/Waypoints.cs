@@ -8,7 +8,6 @@ public class Waypoints : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log(transform.GetChild(0));
         Transform mainPath = transform.GetChild(0);
         mainPathPoints = new Transform[mainPath.childCount];
         for (int i = 0; i < mainPathPoints.Length; i++)

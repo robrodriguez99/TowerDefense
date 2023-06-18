@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Turret : Gun, IRotable {
 
-	private Transform _target;
+	protected Transform target;
 
 	[Header("Attributes")]
 
@@ -43,10 +43,10 @@ public class Turret : Gun, IRotable {
 
 		if (nearestEnemy != null && shortestDistance <= range)
 		{
-			_target = nearestEnemy.transform;
+			target = nearestEnemy.transform;
 		} else
 		{
-			_target = null;
+			target = null;
 		}
 
 	}
@@ -54,22 +54,25 @@ public class Turret : Gun, IRotable {
 	// Update is called once per frame
 	void Update () {
 		currentShotCooldown -= Time.deltaTime;
-		if (_target == null)
+		if (target == null)
 			return;
-		partToRotate.LookAt(_target);
+		partToRotate.LookAt(target);
 		Attack();
 	}
 
 	protected override void Shoot ()
 	{
 		GameObject bulletGO = Instantiate(BulletPrefab, partToRotate.position, partToRotate.rotation);
-		TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
+        Debug.Log(bulletGO.GetComponent<TurretIceBullet>());
+
+        TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
+
         currentShotCooldown = ShotCooldown;
 
 		if (bullet != null)
 		{
 			bullet.WeaponDamage = Damage;
-			bullet.Seek(_target);
+			bullet.Seek(target);
 		}
 	}
 

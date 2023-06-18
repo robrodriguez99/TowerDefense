@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour, IBullet, IMovable
 
     public int WeaponDamage { get; set; }
 
+    public int BulletEffect { get; set; }
+
     public float Lifetime => _bulletStats.Lifetime;
 
     public float MovementSpeed => _bulletStats.MovementSpeed;
@@ -39,7 +41,15 @@ public class Bullet : MonoBehaviour, IBullet, IMovable
         HitTarget();
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         //Have to check if is alive to avoid multiple calls to Die() 
-        if (damageable != null && damageable.IsAlive()) new CmdApplyDamage(damageable, WeaponDamage).Execute();
+        if (damageable != null && damageable.IsAlive())
+        {
+            new CmdApplyDamage(damageable, WeaponDamage).Execute();
+        }
+        IStateful stateful = collision.gameObject.GetComponent<IStateful>();
+        if (stateful != null)
+        {
+            ApplyStatus(stateful);
+        }
         Destroy(this.gameObject);
     }
 
@@ -54,4 +64,10 @@ public class Bullet : MonoBehaviour, IBullet, IMovable
     {
         transform.Translate(direction * MovementSpeed * Time.deltaTime);
     }
+
+    public virtual void ApplyStatus(IStateful stateful)
+    {
+        return;
+    }
+
 }
