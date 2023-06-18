@@ -25,6 +25,13 @@ public class Gun : MonoBehaviour, IGun
 
     protected virtual void Start()
     {
+        Debug.Log("AASA");
+        Debug.Log(transform.name);
+        Debug.Log(_gunStats.Damage);
+        Debug.Log(_gunStats.MagSize);
+        Debug.Log("END");
+
+
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)  // Add an AudioSource if there isn't one already
         {

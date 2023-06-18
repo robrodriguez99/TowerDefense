@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(IceTurret))]
+
 public class BuildManager : MonoBehaviour {
 
 	public static BuildManager instance;
@@ -18,16 +20,11 @@ public class BuildManager : MonoBehaviour {
 			return;
 		}
 		instance = this;
-        Debug.Log(standardTurretPrefab);
-        Debug.Log(iceTurretPrefab);
     }
 
 
     void Start ()
 	{
-
-        Debug.Log(standardTurretPrefab);
-        Debug.Log(iceTurretPrefab);
         _standardTurretToBuild = standardTurretPrefab;
 		_iceTurretToBuild = iceTurretPrefab;
     }

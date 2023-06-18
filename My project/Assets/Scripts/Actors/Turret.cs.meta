@@ -3,7 +3,11 @@ guid: afda8e7d2989b0d4893a618c6bb270a3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _gunStats: {instanceID: 0}
+  - shootingSound: {instanceID: 0}
+  - partToRotate: {instanceID: 0}
+  - firePoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

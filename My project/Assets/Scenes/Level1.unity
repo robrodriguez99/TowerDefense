@@ -21407,6 +21407,7 @@ GameObject:
   - component: {fileID: 1824025230}
   - component: {fileID: 1824025231}
   - component: {fileID: 1824025232}
+  - component: {fileID: 1824025233}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -21459,7 +21460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standardTurretPrefab: {fileID: 4891388236206707612, guid: 467440538ea89a64389ef39976065a90, type: 3}
-  iceTurretPrefab: {fileID: 0}
+  iceTurretPrefab: {fileID: 4891388236206707612, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
 --- !u!114 &1824025230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21509,6 +21510,27 @@ MonoBehaviour:
   _gameoverMessage: {fileID: 528375690}
   EndGameScene: {fileID: 280833572}
   pauseMenu: {fileID: 1044608520}
+--- !u!114 &1824025233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824025226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc05a0cdcbb3d344aa8dcac7fa05c4c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunStats: {fileID: 0}
+  shootingSound: {fileID: 0}
+  _currentBulletCount: 0
+  range: 15
+  fireRate: 1
+  enemyTag: Enemy
+  partToRotate: {fileID: 0}
+  firePoint: {fileID: 0}
+  _rotationSpeed: 10
 --- !u!1001 &1827835901
 PrefabInstance:
   m_ObjectHideFlags: 0
