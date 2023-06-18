@@ -85,11 +85,6 @@ public class Character : Actor
         }
 
         if (Input.GetKey(KeyCode.D)) _cmdMoveRight.Execute();
-     //   if (Math.Abs(Input.GetAxis("Mouse Y")) > 0)
-       // {
-         //  _cmdRotateVertical.Execute(Input.GetAxis("Mouse Y"));
-        //}
-
 
         // Weapons
         if (Input.GetAxis("Fire1") > 0) _cmdAttack.Execute();
@@ -103,13 +98,24 @@ public class Character : Actor
                 EnableNoMoneyMessage();
             else
             {
-
                 Node node = hit.transform.gameObject.GetComponent<Node>();
-                if (node?.BuildTurret() == true) _transactionController.Buy(10);
+                if (node?.BuildTurret(1) == true) _transactionController.Buy(10);
             }
         }
 
-         // Pause game
+        if (Input.GetKeyDown(KeyCode.P) && _isBuildableSpot)
+        {
+            if (_transactionController.Gold < 15)
+                EnableNoMoneyMessage();
+            else
+            {
+                Node node = hit.transform.gameObject.GetComponent<Node>();
+                if (node?.BuildTurret(0) == true) _transactionController.Buy(10);
+            }
+        }
+
+
+        // Pause game
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (Time.timeScale == 1)

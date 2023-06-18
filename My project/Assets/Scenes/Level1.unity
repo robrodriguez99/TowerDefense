@@ -3883,7 +3883,7 @@ RectTransform:
   - {fileID: 1381865930}
   - {fileID: 528375689}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7158,7 +7158,7 @@ Transform:
   - {fileID: 488870397}
   - {fileID: 1082351754}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556473994
 GameObject:
@@ -12634,7 +12634,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1041546976 stripped
 Transform:
@@ -12923,7 +12923,7 @@ RectTransform:
   - {fileID: 722837299}
   - {fileID: 2006786410}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -17892,63 +17892,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7488636829547956335, guid: 2e87cd95842be2f4f91a2a3b9615e4fc, type: 3}
   m_PrefabInstance: {fileID: 78655759}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1502668860
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4891388236206707612, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_Name
-      value: IceTurret
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12.030629
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.980583
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236106385586932006, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
 --- !u!4 &1506705268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7488636829547956335, guid: 2e87cd95842be2f4f91a2a3b9615e4fc, type: 3}
@@ -20992,7 +20935,7 @@ Transform:
   - {fileID: 1992969270}
   - {fileID: 1364749000}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1787171401
 PrefabInstance:
@@ -21516,6 +21459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standardTurretPrefab: {fileID: 4891388236206707612, guid: 467440538ea89a64389ef39976065a90, type: 3}
+  iceTurretPrefab: {fileID: 0}
 --- !u!114 &1824025230
 MonoBehaviour:
   m_ObjectHideFlags: 0

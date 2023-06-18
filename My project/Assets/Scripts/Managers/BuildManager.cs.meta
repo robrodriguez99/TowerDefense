@@ -3,7 +3,9 @@ guid: 52960e533e37ac74992650a24af79916
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - standardTurretPrefab: {fileID: 4891388236206707612, guid: 467440538ea89a64389ef39976065a90, type: 3}
+  - iceTurretPrefab: {fileID: 4891388236206707612, guid: f485bef3c38bc1e4897ef94873c8788c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
