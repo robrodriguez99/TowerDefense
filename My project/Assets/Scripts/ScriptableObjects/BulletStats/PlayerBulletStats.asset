@@ -15,4 +15,4 @@ MonoBehaviour:
   _statValues:
     lifetime: 3
     impactEffect: {fileID: 3057828524516780500, guid: 0e1b5738fa118cb45aada003ee03d4d9, type: 3}
-    movementSpeed: 60
+    movementSpeed: 80

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BigEnemyActorStats
   m_EditorClassIdentifier: 
   _statValues:
-    MaxLife: 0
-    MovementSpeed: 0
-    RotationSpeed: 0
+    MaxLife: 500
+    MovementSpeed: 6
+    RotationSpeed: 10
