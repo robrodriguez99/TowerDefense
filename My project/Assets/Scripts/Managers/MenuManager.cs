@@ -10,6 +10,9 @@ public enum UnityScenes
   [Description("MainMenu")]
   MainMenu,
 
+  [Description("LoadAsync")]
+  LoadAsync,
+
   [Description("Level1")]
   Level1,
 
@@ -25,7 +28,7 @@ public enum UnityScenes
 
 public class MenuManager : MonoBehaviour
 {
-    public void ActionPlay() => SceneManager.LoadScene(UnityScenes.Level1.ToString());
+    public void ActionPlay() => SceneManager.LoadScene(UnityScenes.LoadAsync.ToString());
     public void ActionSettings() => SceneManager.LoadScene(UnityScenes.Settings.ToString());
     public void ActionMenu() => SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
     public void ActionResume() => SceneManager.LoadScene(UnityScenes.Level1.ToString());
