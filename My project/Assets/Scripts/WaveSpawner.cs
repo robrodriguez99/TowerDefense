@@ -15,8 +15,12 @@ public class WaveSpawner : MonoBehaviour
     public static WaveSpawner Instance;
 
     public TextMeshProUGUI  waveCountdownText;
+    public TextMeshProUGUI  remainingWavesText;
 
     private int _waveCounter = 1;
+    private int _enemiesInWave;
+
+    [SerializeField] public int remainingWaves = 5;
 
     void Awake() {
         if (Instance != null) {
@@ -28,20 +32,25 @@ public class WaveSpawner : MonoBehaviour
 
     void Update ()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        var enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        waveCountdownText.text = enemiesLeft.ToString();
+
+        if (enemiesLeft == 0)
         {
-            if (_waveCounter != 0) EventManager.instance.ActionWaveCleared();
+            if (_waveCounter != 0) 
+            {
+                EventManager.instance.ActionWaveCleared();
+                remainingWaves--;
+                remainingWavesText.text = remainingWaves.ToString();
+            }
             StartCoroutine(SpawnWave());
         }
-
-        GameObject.FindGameObjectsWithTag("Enemy");
-
-
-        waveCountdownText.text = Mathf.Round(_waveCounter).ToString();
     }
 
     IEnumerator SpawnWave ()
     {
+        _enemiesInWave = _waveCounter;
+        waveCountdownText.text = _enemiesInWave.ToString();
 
         for (int i = 0; i < _waveCounter; i++)
         {
@@ -57,7 +66,6 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
         _waveCounter++;
-
     }
 
     Transform SpawnEnemy (Transform prefab)
@@ -69,5 +77,4 @@ public class WaveSpawner : MonoBehaviour
         }
         return Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
     }
-
 }
