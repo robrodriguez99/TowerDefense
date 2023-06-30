@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject EndGameScene;
     [SerializeField] public GameObject pauseMenu;
 
+    [SerializeField] public int totalWaves = 5;
+
     private void Start()
     {
         EventManager.instance.OnGameOver += OnGameOver;
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
     private void OnWaveCleared()
     {
         _wavesCleared++;
-        if (_wavesCleared == 5) OnGameOver(true);
+        if (_wavesCleared == totalWaves) OnGameOver(true);
     }
 
     public void ActionExit() => Application.Quit();
