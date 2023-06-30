@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceTurretCannonStats
   m_EditorClassIdentifier: 
   _gunStats:
-    bulletPrefab: {fileID: 4803195870135463313, guid: 1f0963491b6017d46a395b9f75db5b3d, type: 3}
+    bulletPrefab: {fileID: 136330, guid: 88e4b47c5840cea448832d41423a44b4, type: 3}
     Damage: 5
     MagSize: 10
     ShotCooldown: 2.2

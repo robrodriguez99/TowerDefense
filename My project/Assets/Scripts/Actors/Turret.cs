@@ -62,7 +62,7 @@ public class Turret : Gun, IRotable {
 
 	protected override void Shoot ()
 	{
-		GameObject bulletGO = Instantiate(BulletPrefab, partToRotate.position, partToRotate.rotation);
+		GameObject bulletGO = Instantiate(BulletPrefab, firePoint.position, firePoint.rotation);
         TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
 
         currentShotCooldown = ShotCooldown;

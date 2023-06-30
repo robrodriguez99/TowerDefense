@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TurretCannonStats
   m_EditorClassIdentifier: 
   _gunStats:
-    bulletPrefab: {fileID: 4803195870135463313, guid: 9fae4d88cc6450e4286957da9f0835a7, type: 3}
+    bulletPrefab: {fileID: 136330, guid: 9f472093688394840941f20132794aa9, type: 3}
     Damage: 10
     MagSize: 10
     ShotCooldown: 1
