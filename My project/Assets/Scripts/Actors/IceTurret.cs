@@ -14,6 +14,8 @@ public class IceTurret : Turret
         {
             bullet.WeaponDamage = Damage;
             bullet.Seek(target);
+            animator.SetTrigger("ShootIceTurret");
+
         }
     }
 }

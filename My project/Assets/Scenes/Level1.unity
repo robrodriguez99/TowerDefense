@@ -3488,6 +3488,7 @@ GameObject:
   - component: {fileID: 263042964}
   - component: {fileID: 263042963}
   - component: {fileID: 263042962}
+  - component: {fileID: 263042965}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -3577,6 +3578,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263042960}
   m_Mesh: {fileID: 4300000, guid: 3552e5df8302a154aa58fcabfcde28dd, type: 3}
+--- !u!95 &263042965
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263042960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5752e5902e6059b47b8e8f0879dddf86, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &266206183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7488636829547956335, guid: 2e87cd95842be2f4f91a2a3b9615e4fc, type: 3}
@@ -14271,6 +14293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1227319084}
   - component: {fileID: 1227319085}
+  - component: {fileID: 1227319086}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -14312,6 +14335,27 @@ MonoBehaviour:
   _gunStats: {fileID: 11400000, guid: 7db24bb87ef15ab408f0b82338e8ee42, type: 2}
   shootingSound: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
   _currentBulletCount: 0
+--- !u!95 &1227319086
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227319083}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f38267f4815d5ba4095f57d93c07ef17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1230236262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7488636829547956335, guid: 2e87cd95842be2f4f91a2a3b9615e4fc, type: 3}

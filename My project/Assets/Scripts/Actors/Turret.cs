@@ -5,7 +5,10 @@ public class Turret : Gun, IRotable {
 
 	protected Transform target;
 
-	[Header("Attributes")]
+    protected Animator animator;
+
+
+    [Header("Attributes")]
 
 	public float range = 15f;
 	public float fireRate = 1f;
@@ -24,9 +27,11 @@ public class Turret : Gun, IRotable {
     protected override void Start () {
         base.Start();
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
-	}
-	
-	void UpdateTarget ()
+        animator = GetComponentInChildren<Animator>();
+
+    }
+
+    void UpdateTarget ()
 	{
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
 		float shortestDistance = Mathf.Infinity;
@@ -66,6 +71,7 @@ public class Turret : Gun, IRotable {
         TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
 
         currentShotCooldown = ShotCooldown;
+		animator.SetTrigger("ShootTurret");
 
 		if (bullet != null)
 		{
