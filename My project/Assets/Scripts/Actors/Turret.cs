@@ -73,7 +73,7 @@ public class Turret : Gun, IRotable {
         currentShotCooldown = ShotCooldown;
 		animator.SetTrigger("ShootTurret");
 
-		if (bullet != null)
+		if (bullet != null && target != null)
 		{
 			bullet.WeaponDamage = Damage;
 			bullet.Seek(target);
