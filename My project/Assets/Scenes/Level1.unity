@@ -12833,8 +12833,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.1, y: 94, z: 0.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.209169, y: 3.8398166, z: -18.594883}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24658,6 +24658,7 @@ GameObject:
   - component: {fileID: 1824025230}
   - component: {fileID: 1824025231}
   - component: {fileID: 1824025232}
+  - component: {fileID: 1824025233}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -24759,10 +24760,25 @@ MonoBehaviour:
   _isGameOver: 0
   _isVictory: 0
   _wavesCleared: 0
+  _onBuildingPhase: 0
   _gameoverMessage: {fileID: 528375690}
   EndGameScene: {fileID: 280833572}
   pauseMenu: {fileID: 1044608520}
   totalWaves: 5
+--- !u!114 &1824025233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824025226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47507a38a8ed6704dbf4f3efa2e29784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 1967052013}
+  _topCamera: {fileID: 1967513771}
 --- !u!4 &1825578527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d9c3d22cdfbbcfd4f8d8019ff97a0f2e, type: 3}
@@ -26780,8 +26796,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967052011}
   m_LocalRotation: {x: -0, y: 0.71743196, z: -0, w: 0.69662863}
-  m_LocalPosition: {x: 0, y: 0.65900004, z: 0}
-  m_LocalScale: {x: 0.49999994, y: 0.5, z: 0.49999994}
+  m_LocalPosition: {x: 0, y: 0.6589999, z: 0}
+  m_LocalScale: {x: 0.4999999, y: 0.49999997, z: 0.4999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1114979188}
@@ -26854,7 +26870,7 @@ GameObject:
   - component: {fileID: 1967513772}
   - component: {fileID: 1967513771}
   m_Layer: 0
-  m_Name: virtualCam2
+  m_Name: topVirtualCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26867,7 +26883,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967513770}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
