@@ -76,7 +76,7 @@ public class Character : Actor
         //Movement
         if (Input.GetKey(KeyCode.W)) _cmdMoveForward.Execute();
         if (Input.GetKey(KeyCode.S)) _cmdMoveBackwards.Execute();
-
+ 
         if (Input.GetKey(KeyCode.A)) _cmdMoveLeft.Execute();
         if (Input.GetKey(KeyCode.D)) _cmdMoveRight.Execute();
         if (Math.Abs(Input.GetAxis("Mouse X")) > 0)

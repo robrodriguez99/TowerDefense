@@ -27,6 +27,8 @@ public class CineMachineController : MonoBehaviour
             // _currentCamera = _mainCamera;
             // _currentCamera.enabled = true;
             SetMainCamera();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
@@ -34,6 +36,8 @@ public class CineMachineController : MonoBehaviour
             // _currentCamera = _topCamera;
             // _currentCamera.enabled = true;
             SetTopCamera();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
        
     }
