@@ -20,7 +20,9 @@ public class WaveSpawner : MonoBehaviour
     private int _waveCounter = 1;
     private int _enemiesInWave;
 
+    private bool _firstWave = true;
     [SerializeField] public int remainingWaves = 5;
+
 
     void Awake() {
         if (Instance != null) {
@@ -37,13 +39,23 @@ public class WaveSpawner : MonoBehaviour
 
         if (enemiesLeft == 0)
         {
-            if (_waveCounter != 0) 
-            {
-                EventManager.instance.ActionWaveCleared();
-                remainingWaves--;
-                remainingWavesText.text = remainingWaves.ToString();
+            if (!EventManager.instance.IsBuildingPhase) {
+                StartCoroutine(SpawnWave());
             }
-            StartCoroutine(SpawnWave());
+            if (_waveCounter != 0) 
+            {            
+                if (!_firstWave && EventManager.instance.IsBuildingPhase ) 
+                    EventManager.instance.ActionBuildingPhaseStarted();
+             
+                if(!EventManager.instance.IsBuildingPhase ) {
+
+                    EventManager.instance.ActionWaveCleared();
+                    _firstWave = false;
+                    remainingWaves--;
+                    remainingWavesText.text = remainingWaves.ToString();
+                }
+                
+            }
         }
     }
 

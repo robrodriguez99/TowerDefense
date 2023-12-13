@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(CineMachineController))]
+
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver = false;
     [SerializeField] private bool _isVictory = false;
     [SerializeField] private int  _wavesCleared = 0;
+    [SerializeField] private bool _onBuildingPhase = false;
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
     [SerializeField] public GameObject pauseMenu;
 
     [SerializeField] public int totalWaves = 5;
+
+    private CineMachineController _cinemachineController;
 
     private void Start()
     {
@@ -22,7 +28,11 @@ public class GameManager : MonoBehaviour
         EventManager.instance.OnWaveCleared += OnWaveCleared;
         EventManager.instance.OnPauseRequested += OnPauseRequested;
         EventManager.instance.OnResumeRequested += OnResumeRequested;
+        EventManager.instance.OnBuildingPhaseStarted += OnBuildingPhase;
+        EventManager.instance.OnBuildingPhaseEnded += OnBuildingPhaseEnd;
         _gameoverMessage.text = string.Empty;
+        _cinemachineController = GetComponent<CineMachineController>();
+
     }
 
     private void OnGameOver(bool isVictory)
@@ -77,6 +87,21 @@ public class GameManager : MonoBehaviour
         _wavesCleared++;
         if (_wavesCleared == totalWaves) OnGameOver(true);
     }
+
+    public void OnBuildingPhase()
+    {
+        if (!_onBuildingPhase)
+            _cinemachineController.SetTopCamera();
+        _onBuildingPhase = true;
+    }
+
+    public void OnBuildingPhaseEnd()
+    {
+        _onBuildingPhase = false;
+        _cinemachineController.SetMainCamera();
+    }
+
+    public bool IsBuildingPhase() => _onBuildingPhase;
 
     public void ActionExit() => Application.Quit();
 }

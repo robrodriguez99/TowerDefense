@@ -114,6 +114,12 @@ public class Character : Actor
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && EventManager.instance.IsBuildingPhase) {
+            EventManager.instance.ActionBuildingPhaseEnded();
+        }
+
+
+
 
         // Pause game
         if (Input.GetKeyDown(KeyCode.Escape)) 

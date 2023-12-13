@@ -37,6 +37,17 @@ public class EventManager : MonoBehaviour
     public event Action<int> OnGoldChange;
     public event Action OnPauseRequested;
 
+    public event Action OnBuildingPhaseStarted;
+    public event Action OnBuildingPhaseEnded;
+    
+    private bool _buildingPhase = false; // Add new variable
+
+    public bool IsBuildingPhase // Add new property
+    {
+        get => _buildingPhase;
+    }
+
+
     public event Action OnResumeRequested;
 
     #endregion
@@ -57,6 +68,7 @@ public class EventManager : MonoBehaviour
     public void ActionWaveCleared()
     {
         OnWaveCleared?.Invoke();
+        _buildingPhase = true;
     }
 
     public void ActionGameOver(bool isVictory) 
@@ -93,5 +105,15 @@ public class EventManager : MonoBehaviour
         onRewardEarned?.Invoke(amount);
     }
 
+    public void ActionBuildingPhaseStarted() 
+    {
+        OnBuildingPhaseStarted?.Invoke();
+    }
+
+    public void ActionBuildingPhaseEnded() 
+    {
+        OnBuildingPhaseEnded?.Invoke();
+        _buildingPhase = false;
+    }
     #endregion
 }
