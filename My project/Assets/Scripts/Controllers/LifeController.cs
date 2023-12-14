@@ -9,6 +9,8 @@ public class LifeController : MonoBehaviour, IDamageable
 
     public int MaxLife => GetComponent<Actor>().ActorStats.MaxLife;
     public GameObject deathEffectPrefab;
+
+    public GameObject coinPrefab;
     public int CurrentLife => _currentLife;
     [SerializeField] private int _currentLife = 100;
     [SerializeField] private bool _isMainCharacter = false;
@@ -33,6 +35,7 @@ public class LifeController : MonoBehaviour, IDamageable
         if (!_isMainCharacter) {
             if (deathEffectPrefab != null)
                 Instantiate(deathEffectPrefab, transform.position, transform.rotation);
+            Instantiate(coinPrefab, transform.position, coinPrefab.transform.rotation);
             Destroy(this.gameObject);
         } else {
             EventManager.instance.ActionGameOver(false);

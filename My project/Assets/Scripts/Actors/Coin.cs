@@ -26,6 +26,7 @@ public class Coin : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("COLL");
         if (other.name == "Character")
         {
             EventManager.instance.ActionRewardEarned(10);

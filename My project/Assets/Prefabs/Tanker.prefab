@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffectPrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
+  coinPrefab: {fileID: 2660277615334025393, guid: e691f12d2185d4c32a8cfefdd126515a, type: 3}
   _currentLife: 100
   _isMainCharacter: 0
 --- !u!54 &242850359378339730
