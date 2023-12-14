@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject PressSpaceWhenReady;
 
     [SerializeField] public int totalWaves = 5;
 
@@ -90,8 +91,12 @@ public class GameManager : MonoBehaviour
 
     public void OnBuildingPhase()
     {
-        if (!_onBuildingPhase)
+        if (!_onBuildingPhase) {
+
             _cinemachineController.SetTopCamera();
+            _cinemachineController.UnlockCursor();
+            PressSpaceWhenReady.SetActive(true);
+        }
         _onBuildingPhase = true;
     }
 
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour
     {
         _onBuildingPhase = false;
         _cinemachineController.SetMainCamera();
+        PressSpaceWhenReady.SetActive(false);
     }
 
     public bool IsBuildingPhase() => _onBuildingPhase;
