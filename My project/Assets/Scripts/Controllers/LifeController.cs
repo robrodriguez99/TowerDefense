@@ -31,7 +31,6 @@ public class LifeController : MonoBehaviour, IDamageable
 
     public void Die() {
         if (!_isMainCharacter) {
-            EventManager.instance.ActionRewardEarned(10);
             if (deathEffectPrefab != null)
                 Instantiate(deathEffectPrefab, transform.position, transform.rotation);
             Destroy(this.gameObject);
