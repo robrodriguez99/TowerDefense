@@ -9,6 +9,7 @@ TagManager:
   - Music
   - ShotHole
   - Platform
+  - mainCameraHud
   layers:
   - Default
   - TransparentFX

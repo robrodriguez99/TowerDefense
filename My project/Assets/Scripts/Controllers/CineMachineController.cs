@@ -8,6 +8,8 @@ public class CineMachineController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _mainCamera;
     [SerializeField] private CinemachineVirtualCamera _topCamera;
    
+    [SerializeField] public GameObject croshair;
+
 
     private CinemachineVirtualCamera _currentCamera;
 
@@ -23,21 +25,15 @@ public class CineMachineController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            // _currentCamera.enabled = false;
-            // _currentCamera = _mainCamera;
-            // _currentCamera.enabled = true;
             SetMainCamera();
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
-            // _currentCamera.enabled = false;
-            // _currentCamera = _topCamera;
-            // _currentCamera.enabled = true;
             SetTopCamera();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UnlockCursor();
         }
        
     }
@@ -47,6 +43,8 @@ public class CineMachineController : MonoBehaviour
         _currentCamera.enabled = false;
         _currentCamera = _topCamera;
         _currentCamera.enabled = true;
+        croshair.SetActive(false);
+
     }
 
     public void SetMainCamera()
@@ -54,5 +52,14 @@ public class CineMachineController : MonoBehaviour
         _currentCamera.enabled = false;
         _currentCamera = _mainCamera;
         _currentCamera.enabled = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        croshair.SetActive(true);
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

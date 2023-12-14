@@ -55,7 +55,7 @@ public class MovementController : MonoBehaviour, IMovable, IRotable
 
         // Clamp the vertical angle to the desired range
         float clampedVerticalAngle = Mathf.Clamp(currentEulerAngles.x, minVerticalAngle, maxVerticalAngle);
-
+     
         // Apply the clamped vertical angle to the rotation
         transform.rotation = Quaternion.Euler(clampedVerticalAngle, currentEulerAngles.y, currentEulerAngles.z);
     }

@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver = false;
     [SerializeField] private bool _isVictory = false;
-    [SerializeField] private int  _wavesCleared = 0;
+    [SerializeField] private int _wavesCleared = 0;
     [SerializeField] private bool _onBuildingPhase = false;
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject PressSpaceWhenReady;
 
     [SerializeField] public int totalWaves = 5;
 
@@ -47,12 +48,13 @@ public class GameManager : MonoBehaviour
         LoadEndgameScene();
     }
 
-    private void LoadEndgameScene() {
+    private void LoadEndgameScene()
+    {
         Time.timeScale = 0; // This "pauses" the game by making everything happen at "0 speed"
         EndGameScene.SetActive(true);
-         // Make the mouse cursor visible
+        // Make the mouse cursor visible
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None; 
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OnPauseRequested()
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadMainMenu()
     {
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
         // Stop all Coroutines before loading the new scene.
         StopAllCoroutines();
         SceneManager.LoadScene(UnityScenes.MainMenu.ToString());
@@ -90,8 +92,12 @@ public class GameManager : MonoBehaviour
 
     public void OnBuildingPhase()
     {
-        if (!_onBuildingPhase && FindObjectsOfType<Coin>().Length == 0){
+
+        if (!_onBuildingPhase && FindObjectsOfType<Coin>().Length == 0)
+        {
             _cinemachineController.SetTopCamera();
+            _cinemachineController.UnlockCursor();
+            PressSpaceWhenReady.SetActive(true);
             _onBuildingPhase = true;
         }
     }
@@ -100,6 +106,7 @@ public class GameManager : MonoBehaviour
     {
         _onBuildingPhase = false;
         _cinemachineController.SetMainCamera();
+        PressSpaceWhenReady.SetActive(false);
     }
 
     public bool IsBuildingPhase() => _onBuildingPhase;
