@@ -90,9 +90,10 @@ public class GameManager : MonoBehaviour
 
     public void OnBuildingPhase()
     {
-        if (!_onBuildingPhase)
+        if (!_onBuildingPhase && FindObjectsOfType<Coin>().Length == 0){
             _cinemachineController.SetTopCamera();
-        _onBuildingPhase = true;
+            _onBuildingPhase = true;
+        }
     }
 
     public void OnBuildingPhaseEnd()

@@ -5,11 +5,16 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private float _rotationSpeed = .7f;
+
+    protected LifetimeController lifetimeController;
     public AudioClip collectSound;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+
+        lifetimeController = GetComponent<LifetimeController>();
+        lifetimeController.SetLifetime(5f);
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)  // Add an AudioSource if there isn't one already
         {
@@ -22,11 +27,12 @@ public class Coin : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, _rotationSpeed, 0, Space.World);
+        if(lifetimeController.isLifetimeOver())
+            Destroy(this.gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("COLL");
         if (other.name == "Character")
         {
             EventManager.instance.ActionRewardEarned(10);
@@ -43,7 +49,7 @@ public class Coin : MonoBehaviour
 
     IEnumerator DestroyAfterSound()
     {
-        yield return new WaitForSeconds(collectSound.length); // Wait for the sound to finish
+        yield return new WaitForSeconds(collectSound.length/2); // Wait for the sound to finish
         Destroy(this.gameObject); // Destroy the GameObject after the sound finishes playing
     }
 }
