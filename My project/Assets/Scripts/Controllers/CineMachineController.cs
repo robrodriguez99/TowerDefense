@@ -62,4 +62,9 @@ public class CineMachineController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
+    public bool IsTopCamera()
+    {
+        return _currentCamera == _topCamera;
+    }
 }
