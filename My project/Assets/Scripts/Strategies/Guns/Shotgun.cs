@@ -22,7 +22,6 @@ public class Shotgun : Gun
 
     protected override void Shoot()
     {
-        Debug.Log("AA");
         animator.SetTrigger("ShootShotgun");
         currentShotCooldown = ShotCooldown;
         for (int i = 0; i < _bulletsPerShell; i++)

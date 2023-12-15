@@ -21,11 +21,14 @@ public class MouseLook : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-
+        if(CineMachineController.instance.IsTopCamera())
+            _xRotation = Mathf.Clamp(_xRotation, -10f, 10f);
+        else
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
-
     }
+
+    
 }

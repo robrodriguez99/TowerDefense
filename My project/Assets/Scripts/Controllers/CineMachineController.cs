@@ -10,8 +10,24 @@ public class CineMachineController : MonoBehaviour
    
     [SerializeField] public GameObject croshair;
 
+    public static CineMachineController instance;
+
 
     private CinemachineVirtualCamera _currentCamera;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
