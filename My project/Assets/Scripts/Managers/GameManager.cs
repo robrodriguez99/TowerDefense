@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameoverMessage;
     [SerializeField] public GameObject EndGameScene;
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject controlsMenu;
     [SerializeField] public GameObject PressSpaceWhenReady;
 
     [SerializeField] public int totalWaves = 5;
@@ -76,6 +77,17 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked; // this line will lock the cursor again when the game is unpaused.
     }
+
+    public void LoadControlsMenu()
+    {
+        controlsMenu.SetActive(true);
+    }
+
+    public void CloseControlsMenu()
+    {
+        controlsMenu.SetActive(false);
+    }
+    
     public void LoadMainMenu()
     {
         Time.timeScale = 1;
