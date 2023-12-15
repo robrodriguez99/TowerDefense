@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         controlsMenu.SetActive(false);
     }
-    
+
     public void LoadMainMenu()
     {
         Time.timeScale = 1;
@@ -109,7 +109,8 @@ public class GameManager : MonoBehaviour
         {
             _cinemachineController.SetTopCamera();
             _cinemachineController.UnlockCursor();
-            PressSpaceWhenReady.SetActive(true);
+            if (_wavesCleared != totalWaves)
+                PressSpaceWhenReady.SetActive(true);
             _onBuildingPhase = true;
         }
     }

@@ -17,7 +17,10 @@ public class LifeController : MonoBehaviour, IDamageable
     public void RecoverLife(int amount) => _currentLife += amount;
 
     public void TakeDamage(int damage) {
-        _currentLife -= damage;
+        if(_isMainCharacter)
+            _currentLife -= (2*damage);
+        else
+            _currentLife -= damage;
         if (_isMainCharacter)
            ActionUpdateUiLife();
         if (!IsAlive()) Die();
